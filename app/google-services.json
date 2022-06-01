@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "30314574472",
+    "firebase_url": "https://terrazaiot-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "terrazaiot",
+    "storage_bucket": "terrazaiot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30314574472:android:07b6737b53f62c607de53d",
+        "android_client_info": {
+          "package_name": "com.pablo.miterrazaiot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30314574472-380mnlb4ksvvb573l88ueb2gd1nunqm8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGU4eDmNZntr_sB0dTmnL90M1dytiq37g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30314574472-380mnlb4ksvvb573l88ueb2gd1nunqm8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30314574472:android:8288d90206a3e1997de53d",
+        "android_client_info": {
+          "package_name": "com.pablo.pruebafirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30314574472-380mnlb4ksvvb573l88ueb2gd1nunqm8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGU4eDmNZntr_sB0dTmnL90M1dytiq37g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30314574472-380mnlb4ksvvb573l88ueb2gd1nunqm8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

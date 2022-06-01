@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".SeleccionTiempoRiego">
+
+    <TextView
+        android:id="@+id/Titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:text="Seleccion de Horario y Duracion del riego"
+        android:textColor="#46750b"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TitAmb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Tiempo de Riego"
+        android:textColor="#5c9a0f"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/Titulo"
+        app:layout_constraintStart_toStartOf="@+id/Titulo"
+        app:layout_constraintTop_toBottomOf="@+id/Titulo" />
+
+    <Button
+        android:id="@+id/BtnEnvioTiempo"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/rounded_button"
+        android:text="Enviar"
+        app:layout_constraintEnd_toEndOf="@+id/TitAmb"
+        app:layout_constraintStart_toStartOf="@+id/TitAmb"
+        app:layout_constraintTop_toBottomOf="@+id/TitAmb" />
+
+    <SeekBar
+        android:id="@+id/BarraTiempo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:thumbTint="#D32F2F"
+        android:progressBackgroundTint="#bf0909"
+        android:progressTint="#F44336"
+        app:layout_constraintBottom_toTopOf="@+id/TitHorario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TitAmb" />
+
+    <TextView
+        android:id="@+id/TitHorario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:gravity="center"
+        android:text="Horario de Riego"
+        android:textColor="#5c9a0f"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/TitAmb"
+        app:layout_constraintStart_toStartOf="@+id/TitAmb"
+        app:layout_constraintTop_toBottomOf="@+id/TitAmb"
+        tools:ignore="MissingConstraints" />
+
+
+    <Button
+        android:id="@+id/BtnHoraInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_button"
+        android:gravity="center"
+        android:onClick="popTimePicker1"
+        android:text="Inicio"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/TitHorario"
+        app:layout_constraintTop_toBottomOf="@+id/TitHorario" />
+
+    <Button
+        android:id="@+id/BtnHoraFin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_button"
+        android:onClick="popTimePicker2"
+        android:text="Fin"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/TitHorario"
+        app:layout_constraintTop_toBottomOf="@+id/TitHorario" />
+
+    <TextView
+        android:id="@+id/TxtLimiteRiego"
+        android:layout_width="120dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint=""
+        android:inputType="textPersonName"
+        android:text="min."
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/TitAmb"
+        app:layout_constraintStart_toStartOf="@+id/TitAmb"
+        app:layout_constraintTop_toBottomOf="@+id/TitAmb"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/TxtHoraInicioRiego"
+        android:layout_width="110dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="HH:mm"
+        android:inputType="textPersonName"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/BtnHoraInicio"
+        app:layout_constraintStart_toStartOf="@+id/BtnHoraInicio"
+        app:layout_constraintTop_toBottomOf="@+id/BtnHoraInicio"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/TxtHoraFinRiego"
+        android:layout_width="110dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="HH:mm"
+        android:inputType="textPersonName"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/BtnHoraFin"
+        app:layout_constraintStart_toStartOf="@+id/BtnHoraFin"
+        app:layout_constraintTop_toBottomOf="@+id/BtnHoraFin"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/BtnEnvioHorario"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginTop="160dp"
+        android:background="@drawable/rounded_button"
+        android:text="Enviar"
+        app:layout_constraintEnd_toEndOf="@+id/TitHorario"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="@+id/TitHorario"
+        app:layout_constraintTop_toBottomOf="@+id/TitHorario"
+        tools:ignore="MissingConstraints" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

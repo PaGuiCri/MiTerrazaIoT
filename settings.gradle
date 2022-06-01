@@ -1,0 +1,2 @@
+rootProject.name = "MiTerrazaIoT"
+include ':app'

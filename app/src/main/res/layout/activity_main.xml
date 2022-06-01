@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/BtnAccesoTiempo"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rounded_button"
+        android:text="TIEMPO DE RIEGO"
+        app:layout_constraintEnd_toEndOf="@+id/BtnAccesoHum"
+        app:layout_constraintStart_toStartOf="@+id/BtnAccesoHum"
+        app:layout_constraintTop_toBottomOf="@+id/TxtLimiteHum"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+    <Button
+        android:id="@+id/BtnAccesoHum"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_button"
+        android:text="HUMEDAD DE RIEGO"
+        app:layout_constraintEnd_toEndOf="@+id/BtnAuto"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="@+id/BtnAuto"
+        app:layout_constraintTop_toBottomOf="@+id/BtnAuto"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+    <TextView
+        android:id="@+id/TxtTiempoRiego"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="min."
+        android:inputType="textPersonName"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/BtnAccesoTiempo"
+        app:layout_constraintStart_toStartOf="@+id/BtnAccesoTiempo"
+        app:layout_constraintTop_toBottomOf="@+id/BtnAccesoTiempo"
+        tools:ignore="HardcodedText,MissingConstraints,SpUsage" />
+
+    <TextView
+        android:id="@+id/TxtLimiteHum"
+        android:layout_width="120dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="%"
+        android:inputType="textPersonName"
+        android:text="%"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/BtnAccesoHum"
+        app:layout_constraintStart_toStartOf="@+id/BtnAccesoHum"
+        app:layout_constraintTop_toBottomOf="@+id/BtnAccesoHum"
+        tools:ignore="HardcodedText,MissingConstraints,SpUsage" />
+
+    <TextView
+        android:id="@+id/TitHumSus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:text="HUMEDAD SUSTRATO"
+        android:textColor="#5c9a0f"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/TitAmb"
+        app:layout_constraintStart_toStartOf="@+id/TitAmb"
+        app:layout_constraintTop_toBottomOf="@+id/TitAmb"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/TxtHumAmb"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="%"
+        android:inputType="textPersonName"
+        android:text="80%"
+        android:textAlignment="center"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/TitHum"
+        app:layout_constraintStart_toStartOf="@+id/TitHum"
+        app:layout_constraintTop_toBottomOf="@+id/TitHum"
+        tools:ignore="HardcodedText,TextViewEdits" />
+
+    <TextView
+        android:id="@+id/TxtHumSus"
+        android:layout_width="125dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="%"
+        android:inputType="textPersonName"
+        android:text="80%"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/TitHumSus"
+        app:layout_constraintStart_toStartOf="@+id/TitHumSus"
+        app:layout_constraintTop_toBottomOf="@+id/TitHumSus"
+        tools:ignore="HardcodedText,TextViewEdits" />
+
+    <TextView
+        android:id="@+id/TitHum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="20dp"
+        android:text="Humedad"
+        android:textColor="#5c9a0f"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/TitAmb"
+        app:layout_constraintTop_toTopOf="@+id/TitAmb"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+    <TextView
+        android:id="@+id/TitTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="25dp"
+        android:text="Temperatura"
+        android:textColor="#5c9a0f"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/TitAmb"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/TitAmb"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+    <TextView
+        android:id="@+id/TitAmb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="AMBIENTE"
+        android:textColor="#5c9a0f"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/Titulo"
+        app:layout_constraintStart_toStartOf="@+id/Titulo"
+        app:layout_constraintTop_toBottomOf="@+id/Titulo"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/Titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center"
+        android:text="Control de Riego"
+        android:textColor="#103997"
+        android:textSize="45sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TxtTempAmb"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint=""
+        android:inputType="textPersonName"
+        android:text="30ºC"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/TitTemp"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="@+id/TitTemp"
+        app:layout_constraintTop_toBottomOf="@+id/TitTemp" />
+
+    <ToggleButton
+        android:id="@+id/BtnAuto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/Gradient_1"
+        android:onClick="onclick"
+        android:textOff="AUTO OFF"
+        android:textOn="AUTO ON"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="@+id/TitHumSus"
+        app:layout_constraintStart_toStartOf="@+id/TitHumSus"
+        app:layout_constraintTop_toBottomOf="@+id/TxtHumSus"
+        tools:ignore="HardcodedText,MissingConstraints,OnClick,UsingOnClickInXml" />
+
+    <ToggleButton
+        android:id="@+id/BtnManual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:background="@color/Gradient_1"
+        android:onClick="onclick"
+        android:textOff="RIEGO MANUAL OFF"
+        android:textOn="RIEGO MANUAL ON"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/BtnAccesoTiempo"
+        app:layout_constraintStart_toStartOf="@+id/BtnAccesoTiempo"
+        app:layout_constraintTop_toBottomOf="@+id/BtnAccesoTiempo"
+        tools:ignore="HardcodedText,MissingConstraints,UsingOnClickInXml" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
