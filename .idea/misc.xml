@@ -4,11 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Pablo/Desktop/IoTHome/MiTerrazaIoT/app/src/main/res/drawable/rounded_button.xml" value="0.3195" />
+        <entry key="..\:/Users/Pablo/Desktop/IoTHome/MiTerrazaIoT/app/src/main/res/layout/activity_dispositivos_vinculados.xml" value="0.43795620437956206" />
         <entry key="..\:/Users/Pablo/Desktop/IoTHome/MiTerrazaIoT/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Users/Pablo/Desktop/IoTHome/MiTerrazaIoT/app/src/main/res/layout/activity_seleccion_humedad_riego.xml" value="0.375" />
         <entry key="..\:/Users/Pablo/Desktop/IoTHome/MiTerrazaIoT/app/src/main/res/layout/activity_seleccion_tiempo_riego.xml" value="0.5" />
+        <entry key="..\:/Users/Pablo/Desktop/IoTHome/MiTerrazaIoT/app/src/main/res/layout/dispositivos_encontrados.xml" value="0.375" />
         <entry key="..\:/Users/Pablo/Desktop/IoTHome/MiTerrazaIoT/app/src/main/res/layout/fragment_horario_picker.xml" value="0.375" />
         <entry key="..\:/Users/Pablo/Desktop/IoTHome/MiTerrazaIoT/app/src/main/res/layout/fragment_time_picker.xml" value="0.375" />
+        <entry key="..\:/Users/Pablo/Desktop/IoTHome/MiTerrazaIoT/app/src/main/res/layout/nombres.xml" value="0.375" />
       </map>
     </option>
   </component>

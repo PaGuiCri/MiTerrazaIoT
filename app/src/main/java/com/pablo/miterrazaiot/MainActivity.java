@@ -4,10 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothServerSocket;
+import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,7 +26,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.UUID;
+
 public class MainActivity extends AppCompatActivity {
+
+    Handler entradaBT;
+    final int mensajeRecibido = 0;
+    private BluetoothAdapter adaptadorBT;
+    private BluetoothSocket socketBT;
+    private StringBuilder contenidoMensaje = new StringBuilder();
+    private static final UUID uuidBT = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private String direccion;
 
 
     TextView TxtHumAmb, TxtTempAmb, TxtLimiteHum, TxtHumSus, TxtTiempoRiego;
@@ -51,6 +71,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        entradaBT = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(@NonNull Message msg) {
+
+                if(msg.what == mensajeRecibido){
+                    String lectura = (String) msg.obj;
+                    contenidoMensaje.append(lectura);
+                    int finalMensaje = contenidoMensaje.indexOf(".");
+                    if(finalMensaje>0){
+                        String mensaje = contenidoMensaje.substring(0, finalMensaje);
+                        contenidoMensaje.delete(0, contenidoMensaje.length());
+                        Toast.makeText(MainActivity.this, mensaje, Toast.LENGTH_SHORT).show();
+                    }
+                }
+                return false;
+            }
+        });
+
+        adaptadorBT = BluetoothAdapter.getDefaultAdapter();
 
         TxtTempAmb = findViewById(R.id. TxtTempAmb);
         TxtHumAmb = findViewById(R.id. TxtHumAmb);
@@ -228,6 +268,78 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private BluetoothSocket creacionBluetoothSocket(BluetoothDevice device) throws IOException{
+        return device.createRfcommSocketToServiceRecord(uuidBT);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent obtenerMAC = getIntent();
+        direccion = obtenerMAC.getStringExtra(informacionBT.dispositivoSeleccionado);
+        BluetoothDevice device = adaptadorBT.getRemoteDevice(direccion);
+        try{
+            socketBT = creacionBluetoothSocket(device);
+        }catch (IOException e){
+        }
+        try {
+            socketBT.connect();
+        }catch (IOException e){
+            try {
+                Toast.makeText(this, "No fue posible conectar el socket con ese dispositivo", Toast.LENGTH_SHORT).show();
+                socketBT.close();
+            }catch (IOException e2){
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        try {
+            socketBT.close();
+        }catch (IOException e2){
+        }
+    }
+
+    public class conexion extends  Thread {
+        public InputStream InStream;
+        public OutputStream OutStream;
+
+        public conexion(BluetoothSocket socket) {
+            try {
+                InStream = socketBT.getInputStream();
+                OutStream = socketBT.getOutputStream();
+            } catch (IOException e) {
+            }
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            byte[] buffer = new byte[256];
+            int bytes;
+            while(true){
+                try{
+                    bytes = InStream.read(buffer);
+                    String Mensaje = new String(buffer, 0, bytes);
+                    entradaBT.obtainMessage(mensajeRecibido, Mensaje).sendToTarget();
+                }catch (IOException e){
+                    break;
+                }
+            }
+        }
+        public void write(String input){
+            try {
+                OutStream.write(input.getBytes());
+            }catch (IOException e){
+                Toast.makeText(MainActivity.this, "Error envio info", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+    }
+
 
     private void goToSelectHum() {
         Intent intent2 = new Intent(MainActivity.this, SeleccionHumedadRiego.class);
