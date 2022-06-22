@@ -38,7 +38,7 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
     DatabaseReference DataLimiteHoraInicio;
     DatabaseReference DataLimiteHoraFin;
     DatabaseReference DataDatosRiego;
-
+    DatabaseReference DataRiegoConectado;
 
     private HorarioRiego horarioRiego;
 
@@ -55,6 +55,7 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
         DataLimiteHoraFin = database.getReference("LimiteHoraFin");
         DataOK = database.getReference("OK");
         DataDatosRiego = database.getReference("DatosRiego");
+        DataRiegoConectado = database.getReference("RiegoConectado");
 
 
         BarraTiempo = findViewById(R.id.BarraTiempo);

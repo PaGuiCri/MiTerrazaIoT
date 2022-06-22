@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private DatosRiego datosRiego;
     private HorarioRiego horarioRiego;
 
+
     int TempAmb, HumAmb, HumSus;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -87,16 +88,17 @@ public class MainActivity extends AppCompatActivity {
                 goToSelectHum();
             }
         });
-
+        boolean riego_on = false;
         DataRiegoConectado.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Boolean temp = snapshot.getValue(boolean.class);
-                if(temp == true){
+                Boolean riego_on = snapshot.getValue(boolean.class);
+                if(riego_on == true){
+                    TxtLimiteHum.setTextColor(Color.rgb(0,255,0));
                     TxtTiempoRiego.setTextColor(Color.rgb(0,255,0));
                     Toast.makeText(getApplicationContext(), "RIEGO CONECTADO", Toast.LENGTH_SHORT).show();
-
-                }else if(temp == false) {
+                }else if(riego_on == false) {
+                    TxtLimiteHum.setTextColor(Color.rgb(255,0,0));
                     TxtTiempoRiego.setTextColor(Color.rgb(255,0,0));
                     Toast.makeText(getApplicationContext(), "RIEGO DESCONECTADO", Toast.LENGTH_SHORT).show();
                 }
@@ -136,8 +138,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DatosRiego datosRiego = snapshot.getValue(DatosRiego.class);
-                TxtLimiteHum.setText("" + datosRiego.getHumRiego() + "%");
-                TxtTiempoRiego.setText("" + datosRiego.getTiempoRiego() + "min.");
+                if(riego_on == true){
+                    TxtLimiteHum.setText("" + datosRiego.getHumRiego() + "%");
+                    TxtTiempoRiego.setText("" + datosRiego.getTiempoRiego() + "min.");
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        DataLimiteHumedad.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int temp = snapshot.getValue(int.class);
+                if(riego_on != true){
+                    TxtLimiteHum.setText("" + temp + "%");
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        DataLimiteRiego.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int temp = snapshot.getValue(int.class);
+                if(riego_on != true){
+                    TxtTiempoRiego.setText("" + temp + "min.");
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
