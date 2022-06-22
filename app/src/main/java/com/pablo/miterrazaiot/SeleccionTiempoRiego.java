@@ -42,7 +42,6 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
 
     private HorarioRiego horarioRiego;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
