@@ -33,7 +33,6 @@ public class informacionBT extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // cambio
         verificarEstadoBT();
         dispositivos_sincronizados = new ArrayAdapter(this, R.layout.nombres);
         Lista.setAdapter(dispositivos_sincronizados);
@@ -48,7 +47,7 @@ public class informacionBT extends AppCompatActivity {
         }
     }
 
-    private AdapterView.OnItemClickListener seleccionLista = new AdapterView.OnItemClickListener() {
+    private final AdapterView.OnItemClickListener seleccionLista = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             String informacion = ((TextView) view).getText().toString();

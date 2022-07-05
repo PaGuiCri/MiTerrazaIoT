@@ -69,7 +69,7 @@ public class SeleccionHumedadRiego extends AppCompatActivity {
         BarraHum.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                TxtHumRiego.setText(String.valueOf(progress) + "%");
+                TxtHumRiego.setText(progress + "%");
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
