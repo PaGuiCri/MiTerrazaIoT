@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    tools:ignore="MissingClass">
+    tools:context=".MainActivity">
 
     <Button
         android:id="@+id/BtnAccesoTiempo"
@@ -18,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="@+id/BtnAccesoHum"
         app:layout_constraintStart_toStartOf="@+id/BtnAccesoHum"
         app:layout_constraintTop_toBottomOf="@+id/TxtLimiteHum"
-        tools:ignore="HardcodedText,MissingClass,MissingConstraints" />
+        tools:ignore="HardcodedText,MissingConstraints" />
 
     <Button
         android:id="@+id/BtnAccesoHum"

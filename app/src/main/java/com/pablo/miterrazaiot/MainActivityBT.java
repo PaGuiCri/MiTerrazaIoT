@@ -4,16 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothServerSocket;
-import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,21 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.UUID;
-
-public class MainActivity extends AppCompatActivity {
-
-    Handler entradaBT;
-    final int mensajeRecibido = 0;
-    private BluetoothAdapter adaptadorBT;
-    private BluetoothSocket socketBT;
-    private StringBuilder contenidoMensaje = new StringBuilder();
-    private static final UUID uuidBT = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    private String direccion;
+public class MainActivityBT extends AppCompatActivity {
 
 
     TextView TxtHumAmb, TxtTempAmb, TxtLimiteHum, TxtHumSus, TxtTiempoRiego;
@@ -63,33 +43,15 @@ public class MainActivity extends AppCompatActivity {
     private Higro Higro;
     private DatosRiego datosRiego;
     private HorarioRiego horarioRiego;
+
     int TempAmb, HumAmb, HumSus;
+    boolean riego_on = false;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        entradaBT = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(@NonNull Message msg) {
-
-                if(msg.what == mensajeRecibido){
-                    String lectura = (String) msg.obj;
-                    contenidoMensaje.append(lectura);
-                    int finalMensaje = contenidoMensaje.indexOf(".");
-                    if(finalMensaje>0){
-                        String mensaje = contenidoMensaje.substring(0, finalMensaje);
-                        contenidoMensaje.delete(0, contenidoMensaje.length());
-                        Toast.makeText(MainActivity.this, mensaje, Toast.LENGTH_SHORT).show();
-                    }
-                }
-                return false;
-            }
-        });
-
-        adaptadorBT = BluetoothAdapter.getDefaultAdapter();
 
         TxtTempAmb = findViewById(R.id. TxtTempAmb);
         TxtHumAmb = findViewById(R.id. TxtHumAmb);
@@ -125,16 +87,16 @@ public class MainActivity extends AppCompatActivity {
                 goToSelectHum();
             }
         });
-        boolean riego_on = false;
+
         DataRiegoConectado.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Boolean riego_on = snapshot.getValue(boolean.class);
-                if(riego_on == true){
+                riego_on = snapshot.getValue(boolean.class);
+                if(riego_on){
                     TxtLimiteHum.setTextColor(Color.rgb(0,255,0));
                     TxtTiempoRiego.setTextColor(Color.rgb(0,255,0));
                     Toast.makeText(getApplicationContext(), "RIEGO CONECTADO", Toast.LENGTH_SHORT).show();
-                }else if(riego_on == false) {
+                }else {
                     TxtLimiteHum.setTextColor(Color.rgb(255,0,0));
                     TxtTiempoRiego.setTextColor(Color.rgb(255,0,0));
                     Toast.makeText(getApplicationContext(), "RIEGO DESCONECTADO", Toast.LENGTH_SHORT).show();
@@ -175,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DatosRiego datosRiego = snapshot.getValue(DatosRiego.class);
-                if(riego_on == true){
+                if(riego_on){
                     TxtLimiteHum.setText("" + datosRiego.getHumRiego() + "%");
                     TxtTiempoRiego.setText("" + datosRiego.getTiempoRiego() + "min.");
                 }
@@ -188,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int temp = snapshot.getValue(int.class);
-                if(riego_on != true){
+                if(!riego_on){
                     TxtLimiteHum.setText("" + temp + "%");
                 }
             }
@@ -200,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int temp = snapshot.getValue(int.class);
-                if(riego_on == false){
+                if(!riego_on){
                     TxtTiempoRiego.setText("" + temp + "min.");
                 }
             }
@@ -294,85 +256,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private BluetoothSocket creacionBluetoothSocket(BluetoothDevice device) throws IOException{
-        return device.createRfcommSocketToServiceRecord(uuidBT);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Intent obtenerMAC = getIntent();
-        direccion = obtenerMAC.getStringExtra(informacionBT.dispositivoSeleccionado);
-        BluetoothDevice device = adaptadorBT.getRemoteDevice(direccion);
-        try{
-            socketBT = creacionBluetoothSocket(device);
-        }catch (IOException e){
-        }
-        try {
-            socketBT.connect();
-        }catch (IOException e){
-            try {
-                Toast.makeText(this, "No fue posible conectar el socket con ese dispositivo", Toast.LENGTH_SHORT).show();
-                socketBT.close();
-            }catch (IOException e2){
-            }
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        try {
-            socketBT.close();
-        }catch (IOException e2){
-        }
-    }
-
-    public class conexion extends  Thread {
-        public InputStream InStream;
-        public OutputStream OutStream;
-
-        public conexion(BluetoothSocket socket) {
-            try {
-                InStream = socketBT.getInputStream();
-                OutStream = socketBT.getOutputStream();
-            } catch (IOException e) {
-            }
-        }
-
-        @Override
-        public void run() {
-            super.run();
-            byte[] buffer = new byte[256];
-            int bytes;
-            while(true){
-                try{
-                    bytes = InStream.read(buffer);
-                    String Mensaje = new String(buffer, 0, bytes);
-                    entradaBT.obtainMessage(mensajeRecibido, Mensaje).sendToTarget();
-                }catch (IOException e){
-                    break;
-                }
-            }
-        }
-        public void write(String input){
-            try {
-                OutStream.write(input.getBytes());
-            }catch (IOException e){
-                Toast.makeText(MainActivity.this, "Error envio info", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }
-    }
-
-
     private void goToSelectHum() {
-        Intent intent2 = new Intent(MainActivity.this, SeleccionHumedadRiego.class);
+        Intent intent2 = new Intent(MainActivityBT.this, SeleccionHumedadRiego.class);
         startActivity(intent2);
     }
 
     private void goToSelectTemp() {
-        Intent intent = new Intent(MainActivity.this, SeleccionTiempoRiego.class);
+        Intent intent = new Intent(MainActivityBT.this, SeleccionTiempoRiego.class);
         startActivity(intent);
     }
 
