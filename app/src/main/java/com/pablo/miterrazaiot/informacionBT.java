@@ -60,7 +60,7 @@ public class informacionBT extends AppCompatActivity {
     public void verificarEstadoBT(){
         adaptadorBT = BluetoothAdapter.getDefaultAdapter();
         if(adaptadorBT == null){
-            Toast.makeText(this, "Bluetooth no econtrado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bluetooth no encontrado", Toast.LENGTH_SHORT).show();
         }else {
             if(adaptadorBT.isEnabled()){
 
