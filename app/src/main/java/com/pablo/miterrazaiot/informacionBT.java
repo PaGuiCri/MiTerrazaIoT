@@ -29,7 +29,7 @@ public class informacionBT extends AppCompatActivity {
         setContentView(R.layout.activity_informacion_b_t);
         Lista = findViewById(R.id.Lista);
     }
-
+    //cambio desde pc fijo
     @Override
     protected void onResume() {
         super.onResume();
