@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private DatosRiego datosRiego;
     private HorarioRiego horarioRiego;
     int TempAmb, HumAmb, HumSus;
+    boolean riego_on = false;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -85,16 +86,15 @@ public class MainActivity extends AppCompatActivity {
                 goToSelectHum();
             }
         });
-        boolean riego_on = false;
         DataRiegoConectado.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Boolean riego_on = snapshot.getValue(boolean.class);
-                if(riego_on == true){
+                riego_on = snapshot.getValue(boolean.class);
+                if(riego_on){
                     TxtLimiteHum.setTextColor(Color.rgb(0,255,0));
                     TxtTiempoRiego.setTextColor(Color.rgb(0,255,0));
                     Toast.makeText(getApplicationContext(), "RIEGO CONECTADO", Toast.LENGTH_SHORT).show();
-                }else if(riego_on == false) {
+                }else {
                     TxtLimiteHum.setTextColor(Color.rgb(255,0,0));
                     TxtTiempoRiego.setTextColor(Color.rgb(255,0,0));
                     Toast.makeText(getApplicationContext(), "RIEGO DESCONECTADO", Toast.LENGTH_SHORT).show();
