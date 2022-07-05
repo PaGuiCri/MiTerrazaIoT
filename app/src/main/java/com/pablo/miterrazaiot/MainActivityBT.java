@@ -20,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivityBT extends AppCompatActivity {
 
 
     TextView TxtHumAmb, TxtTempAmb, TxtLimiteHum, TxtHumSus, TxtTiempoRiego;
@@ -43,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
     private Higro Higro;
     private DatosRiego datosRiego;
     private HorarioRiego horarioRiego;
+
     int TempAmb, HumAmb, HumSus;
+    boolean riego_on = false;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -85,16 +87,16 @@ public class MainActivity extends AppCompatActivity {
                 goToSelectHum();
             }
         });
-        boolean riego_on = false;
+
         DataRiegoConectado.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Boolean riego_on = snapshot.getValue(boolean.class);
-                if(riego_on == true){
+                riego_on = snapshot.getValue(boolean.class);
+                if(riego_on){
                     TxtLimiteHum.setTextColor(Color.rgb(0,255,0));
                     TxtTiempoRiego.setTextColor(Color.rgb(0,255,0));
                     Toast.makeText(getApplicationContext(), "RIEGO CONECTADO", Toast.LENGTH_SHORT).show();
-                }else if(riego_on == false) {
+                }else {
                     TxtLimiteHum.setTextColor(Color.rgb(255,0,0));
                     TxtTiempoRiego.setTextColor(Color.rgb(255,0,0));
                     Toast.makeText(getApplicationContext(), "RIEGO DESCONECTADO", Toast.LENGTH_SHORT).show();
@@ -135,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DatosRiego datosRiego = snapshot.getValue(DatosRiego.class);
-                if(riego_on == true){
+                if(riego_on){
                     TxtLimiteHum.setText("" + datosRiego.getHumRiego() + "%");
                     TxtTiempoRiego.setText("" + datosRiego.getTiempoRiego() + "min.");
                 }
@@ -148,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int temp = snapshot.getValue(int.class);
-                if(riego_on != true){
+                if(!riego_on){
                     TxtLimiteHum.setText("" + temp + "%");
                 }
             }
@@ -160,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int temp = snapshot.getValue(int.class);
-                if(riego_on == false){
+                if(!riego_on){
                     TxtTiempoRiego.setText("" + temp + "min.");
                 }
             }
@@ -255,12 +257,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goToSelectHum() {
-        Intent intent2 = new Intent(MainActivity.this, SeleccionHumedadRiego.class);
+        Intent intent2 = new Intent(MainActivityBT.this, SeleccionHumedadRiego.class);
         startActivity(intent2);
     }
 
     private void goToSelectTemp() {
-        Intent intent = new Intent(MainActivity.this, SeleccionTiempoRiego.class);
+        Intent intent = new Intent(MainActivityBT.this, SeleccionTiempoRiego.class);
         startActivity(intent);
     }
 

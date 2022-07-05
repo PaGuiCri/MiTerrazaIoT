@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -71,7 +72,7 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
         BarraTiempo.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                TxtLimiteRiego.setText(String.valueOf(progress));
+                TxtLimiteRiego.setText(String.valueOf(progress + "min."));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -108,16 +109,17 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
             }
         });
 
-        DataDatosRiego.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                DatosRiego datosRiego = snapshot.getValue(DatosRiego.class);
-                TxtLimiteRiego.setText("" + datosRiego.getTiempoRiego() + "min.");
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
-            }
+        DataLimiteRiego.addValueEventListener(new ValueEventListener() {
+          @Override
+          public void onDataChange(@NonNull DataSnapshot snapshot) {
+            int temp = snapshot.getValue(int.class);
+            TxtLimiteRiego.setText("" + temp + "min.");
+          }
+
+          @Override
+          public void onCancelled(@NonNull DatabaseError error) {
+
+          }
         });
 
         DataHorarioRiego.addValueEventListener(new ValueEventListener() {

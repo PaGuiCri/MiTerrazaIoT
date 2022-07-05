@@ -42,11 +42,11 @@ public class SeleccionHumedadRiego extends AppCompatActivity {
         DataOK = database.getReference("OK");
         DataDatosRiego = database.getReference("DatosRiego");
 
-        DataDatosRiego.addValueEventListener(new ValueEventListener() {
+        DataLimiteHumedad.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                DatosRiego datosRiego = snapshot.getValue(DatosRiego.class);
-                TxtHumRiego.setText("" + datosRiego.getHumRiego() + "%");
+                int temp = snapshot.getValue(int.class);
+                    TxtHumRiego.setText("" + temp + "%");
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
