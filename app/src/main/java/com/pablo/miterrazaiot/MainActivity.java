@@ -38,13 +38,11 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference DataOK;
     DatabaseReference DataDatosRiego;
     DatabaseReference DataRiegoConectado;
-    DatabaseReference DataHorarioRiego;
 
     private Medidas medidas;
     private DHT11 DHT11;
     private Higro Higro;
     private DatosRiego datosRiego;
-    private HorarioRiego horarioRiego;
     int tempAmb, humAmb, humSus;
     boolean riegoOn = false;
 
@@ -76,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         DataOK = database.getReference("OK");
         DataDatosRiego = database.getReference("DatosRiego");
         DataRiegoConectado = database.getReference("RiegoConectado");
-        DataHorarioRiego = database.getReference("HorarioRiego");
 
         btnAccesoTiempo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,15 +152,6 @@ public class MainActivity extends AppCompatActivity {
                     btnMailRiego.setTextColor(-65536);
                     btnMailRiego.setChecked(false);
                 }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-        DataHorarioRiego.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                HorarioRiego horarioRiego = snapshot.getValue(HorarioRiego.class);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

@@ -30,13 +30,10 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference DataLimiteRiego;
     DatabaseReference DataOK;
-    DatabaseReference DataHorarioRiego;
     DatabaseReference DataLimiteHoraInicio;
     DatabaseReference DataLimiteHoraFin;
     DatabaseReference DataDatosRiego;
     DatabaseReference DataRiegoConectado;
-
-    private HorarioRiego horarioRiego;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +42,6 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         DataLimiteRiego = database.getReference("LimiteRiego");
-        DataHorarioRiego = database.getReference("HorarioRiego");
         DataLimiteHoraInicio = database.getReference("LimiteHoraInicio");
         DataLimiteHoraFin = database.getReference("LimiteHoraFin");
         DataOK = database.getReference("OK");
@@ -70,7 +66,6 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
@@ -108,28 +103,35 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
             int temp = snapshot.getValue(int.class);
             txtLimiteRiego.setText("" + temp + "min.");
           }
-
           @Override
           public void onCancelled(@NonNull DatabaseError error) {
-
           }
         });
 
-        DataHorarioRiego.addValueEventListener(new ValueEventListener() {
+        DataLimiteHoraInicio.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                HorarioRiego horarioRiego = snapshot.getValue(HorarioRiego.class);
-                txtHoraInicioRiego.setText("" + horarioRiego.getHoraInicioRiego());
-                txtHoraFinRiego.setText("" + horarioRiego.getHoraFinRiego());
+                String temp = snapshot.getValue(String.class);
+                txtHoraInicioRiego.setText("" + temp);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        DataLimiteHoraFin.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String temp = snapshot.getValue(String.class);
+                txtHoraFinRiego.setText("" + temp);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
-    public void popTimePicker1(View view){
 
+    public void popTimePicker1(View view){
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int Hour, int Minute) {
@@ -146,7 +148,6 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
     }
 
     public void popTimePicker2(View view){
-
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int Hour, int Minute) {

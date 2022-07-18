@@ -36,16 +36,14 @@ public class MainActivityBT extends AppCompatActivity {
     DatabaseReference DataOK;
     DatabaseReference DataDatosRiego;
     DatabaseReference DataRiegoConectado;
-    DatabaseReference DataHorarioRiego;
 
     private Medidas medidas;
     private DHT11 DHT11;
     private Higro Higro;
     private DatosRiego datosRiego;
-    private HorarioRiego horarioRiego;
 
     int tempAmb, humAmb, humSus;
-    boolean riego_on = false;
+    boolean riegoOn = false;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -72,7 +70,6 @@ public class MainActivityBT extends AppCompatActivity {
         DataOK = database.getReference("OK");
         DataDatosRiego = database.getReference("DatosRiego");
         DataRiegoConectado = database.getReference("RiegoConectado");
-        DataHorarioRiego = database.getReference("HorarioRiego");
 
         btnAccesoTiempo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,8 +88,8 @@ public class MainActivityBT extends AppCompatActivity {
         DataRiegoConectado.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                riego_on = snapshot.getValue(boolean.class);
-                if(riego_on){
+                riegoOn = snapshot.getValue(boolean.class);
+                if(riegoOn){
                     txtLimiteHum.setTextColor(Color.rgb(0,255,0));
                     txtTiempoRiego.setTextColor(Color.rgb(0,255,0));
                     Toast.makeText(getApplicationContext(), "RIEGO CONECTADO", Toast.LENGTH_SHORT).show();
@@ -111,22 +108,13 @@ public class MainActivityBT extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Boolean temp = snapshot.getValue(boolean.class);
-                if(temp == true){
+                if(temp){
                     btnAuto.setTextColor(-16711936);
                     btnAuto.setChecked(true);
-                }else if( temp == false) {
+                }else {
                     btnAuto.setTextColor(-65536);
                     btnAuto.setChecked(false);
                 }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-        DataHorarioRiego.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                HorarioRiego horarioRiego = snapshot.getValue(HorarioRiego.class);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -137,7 +125,7 @@ public class MainActivityBT extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DatosRiego datosRiego = snapshot.getValue(DatosRiego.class);
-                if(riego_on){
+                if(riegoOn){
                     txtLimiteHum.setText("" + datosRiego.getHumRiego() + "%");
                     txtTiempoRiego.setText("" + datosRiego.getTiempoRiego() + "min.");
                 }
@@ -150,7 +138,7 @@ public class MainActivityBT extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int temp = snapshot.getValue(int.class);
-                if(!riego_on){
+                if(!riegoOn){
                     txtLimiteHum.setText("" + temp + "%");
                 }
             }
@@ -162,7 +150,7 @@ public class MainActivityBT extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int temp = snapshot.getValue(int.class);
-                if(!riego_on){
+                if(!riegoOn){
                     txtTiempoRiego.setText("" + temp + "min.");
                 }
             }

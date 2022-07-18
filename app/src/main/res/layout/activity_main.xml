@@ -234,6 +234,7 @@
         android:textOn="ON"
         android:textSize="25dp"
         android:textStyle="bold"
+        android:background="@drawable/rounded_button"
         app:layout_constraintEnd_toStartOf="@+id/btnAccesoTiempo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAccesoTiempo" />
@@ -249,6 +250,7 @@
         android:textOn="ON"
         android:textSize="25dp"
         android:textStyle="bold"
+        android:background="@drawable/rounded_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnAccesoTiempo"
         app:layout_constraintTop_toBottomOf="@+id/btnAccesoTiempo" />
