@@ -17,16 +17,16 @@ import java.util.Set;
 
 public class informacionBT extends AppCompatActivity {
 
-    ListView Lista;
+    ListView lista;
     BluetoothAdapter adaptadorBT;
-    ArrayAdapter dispositivos_sincronizados;
+    ArrayAdapter dispositivosSincronizados;
     public static final String dispositivoSeleccionado = "direccionMAC";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion_bt);
 
-        Lista = findViewById(R.id. Lista);
+        lista = findViewById(R.id.lista);
 
     }
 
@@ -34,13 +34,13 @@ public class informacionBT extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         verificarEstadoBT();
-        dispositivos_sincronizados = new ArrayAdapter(this, R.layout.nombres);
-        Lista.setAdapter(dispositivos_sincronizados);
-        Lista.setOnItemClickListener(seleccionLista);
+        dispositivosSincronizados = new ArrayAdapter(this, R.layout.nombres);
+        lista.setAdapter(dispositivosSincronizados);
+        lista.setOnItemClickListener(seleccionLista);
         Set<BluetoothDevice> dispositivos = adaptadorBT.getBondedDevices();
         if(dispositivos.size()>0){
             for(BluetoothDevice device:dispositivos){
-                dispositivos_sincronizados.add(device.getName() + "/n" + device.getAddress());
+                dispositivosSincronizados.add(device.getName() + "/n" + device.getAddress());
             }
         }else {
             Toast.makeText(this, "No hay Dispositivos Sincronizados", Toast.LENGTH_SHORT).show();

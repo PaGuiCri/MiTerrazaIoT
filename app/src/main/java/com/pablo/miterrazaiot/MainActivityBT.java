@@ -23,9 +23,9 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivityBT extends AppCompatActivity {
 
 
-    TextView TxtHumAmb, TxtTempAmb, TxtLimiteHum, TxtHumSus, TxtTiempoRiego;
-    Button BtnAccesoTiempo, BtnAccesoHum;
-    ToggleButton BtnAuto;
+    TextView txtHumAmb, txtTempAmb, txtLimiteHum, txtHumSus, txtTiempoRiego;
+    Button btnAccesoTiempo, btnAccesoHum;
+    ToggleButton btnAuto;
 
     FirebaseDatabase database;
     DatabaseReference DataLimiteHumedad;
@@ -44,7 +44,7 @@ public class MainActivityBT extends AppCompatActivity {
     private DatosRiego datosRiego;
     private HorarioRiego horarioRiego;
 
-    int TempAmb, HumAmb, HumSus;
+    int tempAmb, humAmb, humSus;
     boolean riego_on = false;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -53,15 +53,15 @@ public class MainActivityBT extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TxtTempAmb = findViewById(R.id. TxtTempAmb);
-        TxtHumAmb = findViewById(R.id. TxtHumAmb);
-        TxtLimiteHum = findViewById(R.id. TxtLimiteHum);
-        TxtHumSus = findViewById(R.id. TxtHumSus);
+        txtTempAmb = findViewById(R.id.txtTempAmb);
+        txtHumAmb = findViewById(R.id.txtHumAmb);
+        txtLimiteHum = findViewById(R.id.txtLimiteHum);
+        txtHumSus = findViewById(R.id.txtHumSus);
 
-        BtnAccesoHum = findViewById(R.id. BtnAccesoHum);
-        BtnAccesoTiempo = findViewById(R.id.BtnAccesoTiempo);
-        TxtTiempoRiego = findViewById(R.id. TxtTiempoRiego);
-        BtnAuto = findViewById(R.id.BtnAuto);
+        btnAccesoHum = findViewById(R.id.btnAccesoHum);
+        btnAccesoTiempo = findViewById(R.id.btnAccesoTiempo);
+        txtTiempoRiego = findViewById(R.id.txtTiempoRiego);
+        btnAuto = findViewById(R.id.btnAuto);
 
         database = FirebaseDatabase.getInstance();
         DataLimiteHumedad = database.getReference("LimiteHumedad");
@@ -74,14 +74,14 @@ public class MainActivityBT extends AppCompatActivity {
         DataRiegoConectado = database.getReference("RiegoConectado");
         DataHorarioRiego = database.getReference("HorarioRiego");
 
-        BtnAccesoTiempo.setOnClickListener(new View.OnClickListener() {
+        btnAccesoTiempo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToSelectTemp();
             }
         });
 
-        BtnAccesoHum.setOnClickListener(new View.OnClickListener() {
+        btnAccesoHum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToSelectHum();
@@ -93,12 +93,12 @@ public class MainActivityBT extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 riego_on = snapshot.getValue(boolean.class);
                 if(riego_on){
-                    TxtLimiteHum.setTextColor(Color.rgb(0,255,0));
-                    TxtTiempoRiego.setTextColor(Color.rgb(0,255,0));
+                    txtLimiteHum.setTextColor(Color.rgb(0,255,0));
+                    txtTiempoRiego.setTextColor(Color.rgb(0,255,0));
                     Toast.makeText(getApplicationContext(), "RIEGO CONECTADO", Toast.LENGTH_SHORT).show();
                 }else {
-                    TxtLimiteHum.setTextColor(Color.rgb(255,0,0));
-                    TxtTiempoRiego.setTextColor(Color.rgb(255,0,0));
+                    txtLimiteHum.setTextColor(Color.rgb(255,0,0));
+                    txtTiempoRiego.setTextColor(Color.rgb(255,0,0));
                     Toast.makeText(getApplicationContext(), "RIEGO DESCONECTADO", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -112,11 +112,11 @@ public class MainActivityBT extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Boolean temp = snapshot.getValue(boolean.class);
                 if(temp == true){
-                    BtnAuto.setTextColor(-16711936);
-                    BtnAuto.setChecked(true);
+                    btnAuto.setTextColor(-16711936);
+                    btnAuto.setChecked(true);
                 }else if( temp == false) {
-                    BtnAuto.setTextColor(-65536);
-                    BtnAuto.setChecked(false);
+                    btnAuto.setTextColor(-65536);
+                    btnAuto.setChecked(false);
                 }
             }
             @Override
@@ -138,8 +138,8 @@ public class MainActivityBT extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DatosRiego datosRiego = snapshot.getValue(DatosRiego.class);
                 if(riego_on){
-                    TxtLimiteHum.setText("" + datosRiego.getHumRiego() + "%");
-                    TxtTiempoRiego.setText("" + datosRiego.getTiempoRiego() + "min.");
+                    txtLimiteHum.setText("" + datosRiego.getHumRiego() + "%");
+                    txtTiempoRiego.setText("" + datosRiego.getTiempoRiego() + "min.");
                 }
             }
             @Override
@@ -151,7 +151,7 @@ public class MainActivityBT extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int temp = snapshot.getValue(int.class);
                 if(!riego_on){
-                    TxtLimiteHum.setText("" + temp + "%");
+                    txtLimiteHum.setText("" + temp + "%");
                 }
             }
             @Override
@@ -163,7 +163,7 @@ public class MainActivityBT extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int temp = snapshot.getValue(int.class);
                 if(!riego_on){
-                    TxtTiempoRiego.setText("" + temp + "min.");
+                    txtTiempoRiego.setText("" + temp + "min.");
                 }
             }
             @Override
@@ -175,79 +175,79 @@ public class MainActivityBT extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Medidas medidas = snapshot.getValue(Medidas.class);
-                TxtHumAmb.setText("" + medidas.getDHT11().getHumedad() +"%");
-                TxtTempAmb.setText("" + medidas.getDHT11().getTemperatura() +"ºC");
-                TxtHumSus.setText("" + medidas.getHigro().getHumedadSuelo() +"%");
-                TempAmb = medidas.getDHT11().getTemperatura();
-                HumAmb = medidas.getDHT11().getHumedad();
-                HumSus = medidas.getHigro().getHumedadSuelo();
+                txtHumAmb.setText("" + medidas.getDHT11().getHumedad() +"%");
+                txtTempAmb.setText("" + medidas.getDHT11().getTemperatura() +"ºC");
+                txtHumSus.setText("" + medidas.getHigro().getHumedadSuelo() +"%");
+                tempAmb = medidas.getDHT11().getTemperatura();
+                humAmb = medidas.getDHT11().getHumedad();
+                humSus = medidas.getHigro().getHumedadSuelo();
 
-                if (TempAmb<=0 && TempAmb>=-5){
-                    TxtTempAmb.setTextColor(Color.parseColor("#1da7bb"));
-                }else if (TempAmb>0 && TempAmb<=5){
-                    TxtTempAmb.setTextColor(Color.parseColor("#00a2a5"));
-                }else if (TempAmb>5 && TempAmb<=10){
-                    TxtTempAmb.setTextColor(Color.parseColor("#009c8a"));
-                }else if (TempAmb>10 && TempAmb<=15){
-                    TxtTempAmb.setTextColor(Color.parseColor("#0e956b"));
-                }else if (TempAmb>15 && TempAmb<=20){
-                    TxtTempAmb.setTextColor(Color.parseColor("#378c4b"));
-                }else if (TempAmb>20 && TempAmb<=25){
-                    TxtTempAmb.setTextColor(Color.parseColor("#508129"));
-                }else if (TempAmb>25 && TempAmb<=30){
-                    TxtTempAmb.setTextColor(Color.parseColor("#657500"));
-                }else if (TempAmb>30 && TempAmb<=35){
-                    TxtTempAmb.setTextColor(Color.parseColor("#786600"));
-                }else if (TempAmb>35 && TempAmb<=40){
-                    TxtTempAmb.setTextColor(Color.parseColor("#8a5400"));
-                }else if (TempAmb>40 && TempAmb<=45){
-                    TxtTempAmb.setTextColor(Color.parseColor("#993d00"));
-                }else  if (TempAmb>45 && TempAmb<=50){
-                    TxtTempAmb.setTextColor(Color.parseColor("#a51708"));
+                if (tempAmb <=0 && tempAmb >=-5){
+                    txtTempAmb.setTextColor(Color.parseColor("#1da7bb"));
+                }else if (tempAmb >0 && tempAmb <=5){
+                    txtTempAmb.setTextColor(Color.parseColor("#00a2a5"));
+                }else if (tempAmb >5 && tempAmb <=10){
+                    txtTempAmb.setTextColor(Color.parseColor("#009c8a"));
+                }else if (tempAmb >10 && tempAmb <=15){
+                    txtTempAmb.setTextColor(Color.parseColor("#0e956b"));
+                }else if (tempAmb >15 && tempAmb <=20){
+                    txtTempAmb.setTextColor(Color.parseColor("#378c4b"));
+                }else if (tempAmb >20 && tempAmb <=25){
+                    txtTempAmb.setTextColor(Color.parseColor("#508129"));
+                }else if (tempAmb >25 && tempAmb <=30){
+                    txtTempAmb.setTextColor(Color.parseColor("#657500"));
+                }else if (tempAmb >30 && tempAmb <=35){
+                    txtTempAmb.setTextColor(Color.parseColor("#786600"));
+                }else if (tempAmb >35 && tempAmb <=40){
+                    txtTempAmb.setTextColor(Color.parseColor("#8a5400"));
+                }else if (tempAmb >40 && tempAmb <=45){
+                    txtTempAmb.setTextColor(Color.parseColor("#993d00"));
+                }else  if (tempAmb >45 && tempAmb <=50){
+                    txtTempAmb.setTextColor(Color.parseColor("#a51708"));
                 }
 
-                if (HumSus>0 && HumSus<=10){
-                    TxtHumSus.setTextColor(Color.parseColor("#3195e3"));
-                }else if (HumSus>10 && HumSus<=20){
-                    TxtHumSus.setTextColor(Color.parseColor("#0189e2"));
-                }else if (HumSus>20 && HumSus<=30){
-                    TxtHumSus.setTextColor(Color.parseColor("#007de0"));
-                }else if (HumSus>30 && HumSus<=40){
-                    TxtHumSus.setTextColor(Color.parseColor("#0071dd"));
-                }else if (HumSus>40 && HumSus<=50){
-                    TxtHumSus.setTextColor(Color.parseColor("#0064d9"));
-                }else if (HumSus>50 && HumSus<=60){
-                    TxtHumSus.setTextColor(Color.parseColor("#0057d4"));
-                }else if (HumSus>60 && HumSus<=70){
-                    TxtHumSus.setTextColor(Color.parseColor("#0049cf"));
-                }else if (HumSus>7 && HumSus<=80){
-                    TxtHumSus.setTextColor(Color.parseColor("#0039c7"));
-                }else if (HumSus>80 && HumSus<=90){
-                    TxtHumSus.setTextColor(Color.parseColor("#0028bf"));
-                }else if (HumSus>90 && HumSus<=100){
-                    TxtHumSus.setTextColor(Color.parseColor("#090db5"));
+                if (humSus >0 && humSus <=10){
+                    txtHumSus.setTextColor(Color.parseColor("#3195e3"));
+                }else if (humSus >10 && humSus <=20){
+                    txtHumSus.setTextColor(Color.parseColor("#0189e2"));
+                }else if (humSus >20 && humSus <=30){
+                    txtHumSus.setTextColor(Color.parseColor("#007de0"));
+                }else if (humSus >30 && humSus <=40){
+                    txtHumSus.setTextColor(Color.parseColor("#0071dd"));
+                }else if (humSus >40 && humSus <=50){
+                    txtHumSus.setTextColor(Color.parseColor("#0064d9"));
+                }else if (humSus >50 && humSus <=60){
+                    txtHumSus.setTextColor(Color.parseColor("#0057d4"));
+                }else if (humSus >60 && humSus <=70){
+                    txtHumSus.setTextColor(Color.parseColor("#0049cf"));
+                }else if (humSus >7 && humSus <=80){
+                    txtHumSus.setTextColor(Color.parseColor("#0039c7"));
+                }else if (humSus >80 && humSus <=90){
+                    txtHumSus.setTextColor(Color.parseColor("#0028bf"));
+                }else if (humSus >90 && humSus <=100){
+                    txtHumSus.setTextColor(Color.parseColor("#090db5"));
                 }
 
-                if (HumAmb>0 && HumAmb<=10){
-                    TxtHumAmb.setTextColor(Color.parseColor("#3195e3"));
-                }else if (HumAmb>10 && HumAmb<=20){
-                    TxtHumAmb.setTextColor(Color.parseColor("#0189e2"));
-                }else if (HumAmb>20 && HumAmb<=30){
-                    TxtHumAmb.setTextColor(Color.parseColor("#007de0"));
-                }else if (HumAmb>30 && HumAmb<=40){
-                    TxtHumAmb.setTextColor(Color.parseColor("#0071dd"));
-                }else if (HumAmb>40 && HumAmb<=50){
-                    TxtHumAmb.setTextColor(Color.parseColor("#0064d9"));
-                }else if (HumAmb>50 && HumAmb<=60){
-                    TxtHumAmb.setTextColor(Color.parseColor("#0057d4"));
-                }else if (HumAmb>60 && HumAmb<=70){
-                    TxtHumAmb.setTextColor(Color.parseColor("#0049cf"));
-                }else if (HumAmb>7 && HumAmb<=80){
-                    TxtHumAmb.setTextColor(Color.parseColor("#0039c7"));
-                }else if (HumAmb>80 && HumAmb<=90){
-                    TxtHumAmb.setTextColor(Color.parseColor("#0b17b6"));
-                }else if (HumAmb>90 && HumAmb<=100){
-                    TxtHumAmb.setTextColor(Color.parseColor("#090db5"));
+                if (humAmb >0 && humAmb <=10){
+                    txtHumAmb.setTextColor(Color.parseColor("#3195e3"));
+                }else if (humAmb >10 && humAmb <=20){
+                    txtHumAmb.setTextColor(Color.parseColor("#0189e2"));
+                }else if (humAmb >20 && humAmb <=30){
+                    txtHumAmb.setTextColor(Color.parseColor("#007de0"));
+                }else if (humAmb >30 && humAmb <=40){
+                    txtHumAmb.setTextColor(Color.parseColor("#0071dd"));
+                }else if (humAmb >40 && humAmb <=50){
+                    txtHumAmb.setTextColor(Color.parseColor("#0064d9"));
+                }else if (humAmb >50 && humAmb <=60){
+                    txtHumAmb.setTextColor(Color.parseColor("#0057d4"));
+                }else if (humAmb >60 && humAmb <=70){
+                    txtHumAmb.setTextColor(Color.parseColor("#0049cf"));
+                }else if (humAmb >7 && humAmb <=80){
+                    txtHumAmb.setTextColor(Color.parseColor("#0039c7"));
+                }else if (humAmb >80 && humAmb <=90){
+                    txtHumAmb.setTextColor(Color.parseColor("#0b17b6"));
+                }else if (humAmb >90 && humAmb <=100){
+                    txtHumAmb.setTextColor(Color.parseColor("#090db5"));
                 }
             }
             @Override
@@ -267,8 +267,8 @@ public class MainActivityBT extends AppCompatActivity {
     }
 
     public void onclick(View view) {
-        if (view.getId() == R.id.BtnAuto) {
-            if (BtnAuto.isChecked()) {
+        if (view.getId() == R.id.btnAuto) {
+            if (btnAuto.isChecked()) {
                 Toast.makeText(getApplicationContext(), "AUTO ON", Toast.LENGTH_SHORT).show();
                 DataRiegoAuto.setValue(true);
                 DataOK.setValue(true);

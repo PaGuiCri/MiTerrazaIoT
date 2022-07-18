@@ -8,32 +8,32 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/BtnAccesoTiempo"
+        android:id="@+id/btnAccesoTiempo"
         android:layout_width="wrap_content"
-        android:layout_height="44dp"
+        android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/rounded_button"
         android:text="TIEMPO DE RIEGO"
-        app:layout_constraintEnd_toEndOf="@+id/BtnAccesoHum"
-        app:layout_constraintStart_toStartOf="@+id/BtnAccesoHum"
-        app:layout_constraintTop_toBottomOf="@+id/TxtLimiteHum"
+        app:layout_constraintEnd_toEndOf="@+id/btnAccesoHum"
+        app:layout_constraintStart_toStartOf="@+id/btnAccesoHum"
+        app:layout_constraintTop_toBottomOf="@+id/txtLimiteHum"
         tools:ignore="HardcodedText,MissingConstraints" />
 
     <Button
-        android:id="@+id/BtnAccesoHum"
+        android:id="@+id/btnAccesoHum"
         android:layout_width="wrap_content"
-        android:layout_height="44dp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_button"
         android:text="HUMEDAD DE RIEGO"
-        app:layout_constraintEnd_toEndOf="@+id/BtnAuto"
+        app:layout_constraintEnd_toEndOf="@+id/btnAuto"
         app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="@+id/BtnAuto"
-        app:layout_constraintTop_toBottomOf="@+id/BtnAuto"
+        app:layout_constraintStart_toStartOf="@+id/btnAuto"
+        app:layout_constraintTop_toBottomOf="@+id/btnAuto"
         tools:ignore="HardcodedText,MissingConstraints" />
 
     <TextView
-        android:id="@+id/TxtTiempoRiego"
+        android:id="@+id/txtTiempoRiego"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
@@ -44,15 +44,15 @@
         android:textSize="40dp"
         android:textStyle="bold"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/BtnAccesoTiempo"
-        app:layout_constraintStart_toStartOf="@+id/BtnAccesoTiempo"
-        app:layout_constraintTop_toBottomOf="@+id/BtnAccesoTiempo"
+        app:layout_constraintEnd_toEndOf="@+id/btnAccesoTiempo"
+        app:layout_constraintStart_toStartOf="@+id/btnAccesoTiempo"
+        app:layout_constraintTop_toBottomOf="@+id/btnAccesoTiempo"
         tools:ignore="HardcodedText,MissingConstraints,SpUsage" />
 
     <TextView
-        android:id="@+id/TxtLimiteHum"
+        android:id="@+id/txtLimiteHum"
         android:layout_width="120dp"
-        android:layout_height="44dp"
+        android:layout_height="50dp"
         android:layout_marginTop="11dp"
         android:ems="10"
         android:gravity="center"
@@ -62,27 +62,35 @@
         android:textAlignment="center"
         android:textSize="40dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/BtnAccesoHum"
-        app:layout_constraintStart_toStartOf="@+id/BtnAccesoHum"
-        app:layout_constraintTop_toBottomOf="@+id/BtnAccesoHum"
+        app:layout_constraintEnd_toEndOf="@+id/btnAccesoHum"
+        app:layout_constraintStart_toStartOf="@+id/btnAccesoHum"
+        app:layout_constraintTop_toBottomOf="@+id/btnAccesoHum"
         tools:ignore="HardcodedText,MissingConstraints,SpUsage" />
 
     <TextView
-        android:id="@+id/TitHumSus"
+        android:id="@+id/titHumSus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="120dp"
         android:text="HUMEDAD SUSTRATO"
         android:textColor="#5c9a0f"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/TitAmb"
-        app:layout_constraintStart_toStartOf="@+id/TitAmb"
-        app:layout_constraintTop_toBottomOf="@+id/TitAmb"
+        app:layout_constraintEnd_toEndOf="@+id/titAmb"
+        app:layout_constraintStart_toStartOf="@+id/titAmb"
+        app:layout_constraintTop_toBottomOf="@+id/titAmb"
         tools:ignore="HardcodedText" />
 
+    <com.ekn.gruzer.gaugelibrary.ArcGauge
+        android:id="@+id/gaugeTempAmb"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintEnd_toEndOf="@+id/titTemp"
+        app:layout_constraintStart_toStartOf="@+id/titTemp"
+        app:layout_constraintTop_toBottomOf="@+id/titTemp" />
+
     <TextView
-        android:id="@+id/TxtHumAmb"
+        android:id="@+id/txtHumAmb"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
@@ -94,13 +102,13 @@
         android:textAlignment="center"
         android:textSize="35sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/TitHum"
-        app:layout_constraintStart_toStartOf="@+id/TitHum"
-        app:layout_constraintTop_toBottomOf="@+id/TitHum"
+        app:layout_constraintEnd_toEndOf="@+id/titHum"
+        app:layout_constraintStart_toStartOf="@+id/titHum"
+        app:layout_constraintTop_toBottomOf="@+id/titHum"
         tools:ignore="HardcodedText,TextViewEdits" />
 
     <TextView
-        android:id="@+id/TxtHumSus"
+        android:id="@+id/txtHumSus"
         android:layout_width="125dp"
         android:layout_height="55dp"
         android:layout_marginTop="15dp"
@@ -111,76 +119,87 @@
         android:text="80%"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/TitHumSus"
-        app:layout_constraintStart_toStartOf="@+id/TitHumSus"
-        app:layout_constraintTop_toBottomOf="@+id/TitHumSus"
+        app:layout_constraintEnd_toEndOf="@+id/titHumSus"
+        app:layout_constraintStart_toStartOf="@+id/titHumSus"
+        app:layout_constraintTop_toBottomOf="@+id/titHumSus"
         tools:ignore="HardcodedText,TextViewEdits" />
 
     <TextView
-        android:id="@+id/TitHum"
+        android:id="@+id/titHum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
         android:text="Humedad"
         android:textColor="#5c9a0f"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/TitAmb"
-        app:layout_constraintTop_toTopOf="@+id/TitAmb"
+        app:layout_constraintStart_toEndOf="@+id/titAmb"
+        app:layout_constraintTop_toTopOf="@+id/titAmb"
         tools:ignore="HardcodedText,MissingConstraints" />
 
     <TextView
-        android:id="@+id/TitTemp"
+        android:id="@+id/titTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="25dp"
         android:text="Temperatura"
         android:textColor="#5c9a0f"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/TitAmb"
+        app:layout_constraintEnd_toStartOf="@+id/titAmb"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/TitAmb"
+        app:layout_constraintTop_toTopOf="@+id/titAmb"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/titMailIni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Envio Mail Inicio"
+        android:textColor="#5c9a0f"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnMailIni"
+        app:layout_constraintEnd_toEndOf="@+id/btnMailIni"
+        app:layout_constraintStart_toStartOf="@+id/btnMailIni"
         tools:ignore="HardcodedText,MissingConstraints" />
 
     <TextView
-        android:id="@+id/TitAmb"
+        android:id="@+id/titMailRiego"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:text="Envio Mail Riego"
+        android:textColor="#5c9a0f"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnMailRiego"
+        app:layout_constraintEnd_toEndOf="@+id/btnMailRiego"
+        app:layout_constraintStart_toStartOf="@+id/btnMailRiego"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+    <TextView
+        android:id="@+id/titAmb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="AMBIENTE"
         android:textColor="#5c9a0f"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/Titulo"
-        app:layout_constraintStart_toStartOf="@+id/Titulo"
-        app:layout_constraintTop_toBottomOf="@+id/Titulo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/Titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp"
-        android:gravity="center"
-        android:text="Control de Riego"
-        android:textColor="#103997"
-        android:textSize="45sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/TxtTempAmb"
+        android:id="@+id/txtTempAmb"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
@@ -191,13 +210,13 @@
         android:text="30ºC"
         android:textSize="35sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/TitTemp"
+        app:layout_constraintEnd_toEndOf="@+id/titTemp"
         app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toStartOf="@+id/TitTemp"
-        app:layout_constraintTop_toBottomOf="@+id/TitTemp" />
+        app:layout_constraintStart_toStartOf="@+id/titTemp"
+        app:layout_constraintTop_toBottomOf="@+id/titTemp" />
 
     <ToggleButton
-        android:id="@+id/BtnAuto"
+        android:id="@+id/btnAuto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -206,9 +225,35 @@
         android:textOff="AUTO OFF"
         android:textOn="AUTO ON"
         android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="@+id/TitHumSus"
-        app:layout_constraintStart_toStartOf="@+id/TitHumSus"
-        app:layout_constraintTop_toBottomOf="@+id/TxtHumSus"
+        app:layout_constraintEnd_toEndOf="@+id/titHumSus"
+        app:layout_constraintStart_toStartOf="@+id/titHumSus"
+        app:layout_constraintTop_toBottomOf="@+id/txtHumSus"
         tools:ignore="HardcodedText,MissingConstraints,OnClick,UsingOnClickInXml" />
+
+    <ToggleButton
+        android:id="@+id/btnMailIni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="100dp"
+        android:text="ToggleButton"
+        android:textOff="OFF"
+        android:textOn="ON"
+        app:layout_constraintEnd_toStartOf="@+id/btnAccesoTiempo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAccesoTiempo" />
+
+    <ToggleButton
+        android:id="@+id/btnMailRiego"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="50dp"
+        android:text="ToggleButton"
+        android:textOff="OFF"
+        android:textOn="ON"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnAccesoTiempo"
+        app:layout_constraintTop_toBottomOf="@+id/btnAccesoTiempo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

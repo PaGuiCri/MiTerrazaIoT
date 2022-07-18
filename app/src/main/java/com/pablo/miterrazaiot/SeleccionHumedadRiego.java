@@ -19,9 +19,9 @@ import com.google.firebase.database.ValueEventListener;
 public class SeleccionHumedadRiego extends AppCompatActivity {
 
 
-    Button BtnEnvioHum;
-    SeekBar BarraHum;
-    TextView TxtHumRiego;
+    Button btnEnvioHum;
+    SeekBar barraHum;
+    TextView txtHumRiego;
 
     FirebaseDatabase database;
     DatabaseReference DataLimiteHumedad;
@@ -33,9 +33,9 @@ public class SeleccionHumedadRiego extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleccion_humedad_riego);
 
-        BtnEnvioHum = findViewById(R.id. BtnEnvioHum);
-        BarraHum = findViewById(R.id. BarraHum);
-        TxtHumRiego = findViewById(R.id. TxtHumRiego);
+        btnEnvioHum = findViewById(R.id. BtnEnvioHum);
+        barraHum = findViewById(R.id. BarraHum);
+        txtHumRiego = findViewById(R.id. TxtHumRiego);
 
         database = FirebaseDatabase.getInstance();
         DataLimiteHumedad = database.getReference("LimiteHumedad");
@@ -46,30 +46,30 @@ public class SeleccionHumedadRiego extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int temp = snapshot.getValue(int.class);
-                    TxtHumRiego.setText("" + temp + "%");
+                    txtHumRiego.setText("" + temp + "%");
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
 
-        BtnEnvioHum.setOnClickListener(new View.OnClickListener() {
+        btnEnvioHum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(SeleccionHumedadRiego.this, "OK", Toast.LENGTH_SHORT).show();
-                String tempHum = TxtHumRiego.getText().toString();
+                String tempHum = txtHumRiego.getText().toString();
                 Toast.makeText(SeleccionHumedadRiego.this, tempHum, Toast.LENGTH_SHORT).show();
-                TxtHumRiego.setText(tempHum);
-                DataLimiteHumedad.setValue(BarraHum.getProgress());
+                txtHumRiego.setText(tempHum);
+                DataLimiteHumedad.setValue(barraHum.getProgress());
                 DataOK.setValue(true);
             }
         });
 
-        BarraHum.setMax(100);
-        BarraHum.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        barraHum.setMax(100);
+        barraHum.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                TxtHumRiego.setText(progress + "%");
+                txtHumRiego.setText(progress + "%");
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {

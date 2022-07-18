@@ -9,7 +9,7 @@
     tools:context=".SeleccionTiempoRiego">
 
     <TextView
-        android:id="@+id/Titulo"
+        android:id="@+id/titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/TitAmb"
+        android:id="@+id/titAmb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -34,9 +34,9 @@
         android:textColor="#5c9a0f"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/Titulo"
-        app:layout_constraintStart_toStartOf="@+id/Titulo"
-        app:layout_constraintTop_toBottomOf="@+id/Titulo" />
+        app:layout_constraintEnd_toEndOf="@+id/titulo"
+        app:layout_constraintStart_toStartOf="@+id/titulo"
+        app:layout_constraintTop_toBottomOf="@+id/titulo" />
 
     <Button
         android:id="@+id/BtnEnvioTiempo"
@@ -45,9 +45,9 @@
         android:layout_marginTop="80dp"
         android:background="@drawable/rounded_button"
         android:text="Enviar"
-        app:layout_constraintEnd_toEndOf="@+id/TitAmb"
-        app:layout_constraintStart_toStartOf="@+id/TitAmb"
-        app:layout_constraintTop_toBottomOf="@+id/TitAmb" />
+        app:layout_constraintEnd_toEndOf="@+id/titAmb"
+        app:layout_constraintStart_toStartOf="@+id/titAmb"
+        app:layout_constraintTop_toBottomOf="@+id/titAmb" />
 
     <SeekBar
         android:id="@+id/BarraTiempo"
@@ -63,7 +63,7 @@
         app:layout_constraintBottom_toTopOf="@+id/TitHorario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TitAmb" />
+        app:layout_constraintTop_toBottomOf="@+id/titAmb" />
 
     <TextView
         android:id="@+id/TitHorario"
@@ -75,9 +75,9 @@
         android:textColor="#5c9a0f"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/TitAmb"
-        app:layout_constraintStart_toStartOf="@+id/TitAmb"
-        app:layout_constraintTop_toBottomOf="@+id/TitAmb"
+        app:layout_constraintEnd_toEndOf="@+id/titAmb"
+        app:layout_constraintStart_toStartOf="@+id/titAmb"
+        app:layout_constraintTop_toBottomOf="@+id/titAmb"
         tools:ignore="MissingConstraints" />
 
 
@@ -122,9 +122,9 @@
         android:text="min."
         android:textSize="40dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/TitAmb"
-        app:layout_constraintStart_toStartOf="@+id/TitAmb"
-        app:layout_constraintTop_toBottomOf="@+id/TitAmb"
+        app:layout_constraintEnd_toEndOf="@+id/titAmb"
+        app:layout_constraintStart_toStartOf="@+id/titAmb"
+        app:layout_constraintTop_toBottomOf="@+id/titAmb"
         tools:ignore="MissingConstraints" />
 
     <TextView

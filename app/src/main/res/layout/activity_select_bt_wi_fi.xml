@@ -7,7 +7,7 @@
     tools:context=".SelectBtWiFiActivity">
 
     <Button
-        android:id="@+id/btn_bluetooth"
+        android:id="@+id/btnBluetooth"
         android:layout_width="0dp"
         android:layout_height="71dp"
         android:layout_marginStart="10dp"
@@ -20,11 +20,11 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_tit_select_protocolo"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitSelectProtocolo"
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/btn_wifi"
+        android:id="@+id/btnWifi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -37,15 +37,31 @@
         android:background="@drawable/rounded_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_bluetooth"
+        app:layout_constraintTop_toBottomOf="@+id/btnBluetooth"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/txt_tit_select_protocolo"
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center"
+        android:text="Control de Riego"
+        android:textColor="#103997"
+        android:textSize="45sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtTitSelectProtocolo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="5dp"
         android:text="SELECCCIONAR PROTOCOLO DE COMUNICACION"
         android:textAlignment="center"
@@ -61,11 +77,11 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="122dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="122dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo"
         tools:ignore="MissingConstraints"
         tools:srcCompat="@drawable/logo_monstera" />
 </androidx.constraintlayout.widget.ConstraintLayout>

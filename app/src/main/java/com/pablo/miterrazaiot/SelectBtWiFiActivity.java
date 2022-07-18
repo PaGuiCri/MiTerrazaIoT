@@ -11,29 +11,29 @@ import android.widget.TextView;
 
 public class SelectBtWiFiActivity extends AppCompatActivity {
 
-    Button BtnBluetooth, BtnWiFi;
-    TextView TxtTitSelectProtocol;
-    ImageView ImgMonstera;
+    Button btnBluetooth, btnWiFi;
+    TextView txtTitSelectProtocol;
+    ImageView imgMonstera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_bt_wi_fi);
 
-        TxtTitSelectProtocol = findViewById(R.id. txt_tit_select_protocolo);
-        BtnBluetooth = findViewById(R.id. btn_bluetooth);
-        BtnWiFi = findViewById(R.id. btn_wifi);
-        ImgMonstera = findViewById(R.id. img_monstera);
+        txtTitSelectProtocol = findViewById(R.id.txtTitSelectProtocolo);
+        btnBluetooth = findViewById(R.id.btnBluetooth);
+        btnWiFi = findViewById(R.id.btnWifi);
+        imgMonstera = findViewById(R.id. img_monstera);
 
 
-        BtnBluetooth.setOnClickListener(new View.OnClickListener() {
+        btnBluetooth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
              goToBluetooth();
             }
         });
 
-        BtnWiFi.setOnClickListener(new View.OnClickListener() {
+        btnWiFi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToWiFi();

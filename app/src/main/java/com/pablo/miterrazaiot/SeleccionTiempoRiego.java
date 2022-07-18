@@ -3,15 +3,10 @@ package com.pablo.miterrazaiot;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
 import android.app.TimePickerDialog;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -27,10 +22,10 @@ import java.util.Locale;
 
 public class SeleccionTiempoRiego extends AppCompatActivity {
 
-    SeekBar BarraTiempo;
-    TextView TxtLimiteRiego, TxtHoraInicioRiego, TxtHoraFinRiego;
-    Button BtnEnvioTiempo, BtnEnvioHorario, BtnHoraInicio, BtnHoraFin;
-    int T1Hour, T1Minute, T2Hour, T2Minute;
+    SeekBar barraTiempo;
+    TextView txtLimiteRiego, txtHoraInicioRiego, txtHoraFinRiego;
+    Button btnEnvioTiempo, btnEnvioHorario, btnHoraInicio, btnHoraFin;
+    int t1Hour, t1Minute, t2Hour, t2Minute;
 
     FirebaseDatabase database;
     DatabaseReference DataLimiteRiego;
@@ -57,22 +52,20 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
         DataDatosRiego = database.getReference("DatosRiego");
         DataRiegoConectado = database.getReference("RiegoConectado");
 
+        barraTiempo = findViewById(R.id.BarraTiempo);
+        btnEnvioTiempo = findViewById(R.id. BtnEnvioTiempo);
+        btnEnvioHorario = findViewById(R.id. BtnEnvioHorario);
+        txtLimiteRiego = findViewById(R.id. TxtLimiteRiego);
+        txtHoraInicioRiego = findViewById(R.id. TxtHoraInicioRiego);
+        txtHoraFinRiego = findViewById(R.id. TxtHoraFinRiego);
+        btnHoraInicio = findViewById(R.id. BtnHoraInicio);
+        btnHoraFin = findViewById(R.id. BtnHoraFin);
 
-        BarraTiempo = findViewById(R.id.BarraTiempo);
-        BtnEnvioTiempo = findViewById(R.id. BtnEnvioTiempo);
-        BtnEnvioHorario = findViewById(R.id. BtnEnvioHorario);
-        TxtLimiteRiego = findViewById(R.id. TxtLimiteRiego);
-        TxtHoraInicioRiego = findViewById(R.id. TxtHoraInicioRiego);
-        TxtHoraFinRiego = findViewById(R.id. TxtHoraFinRiego);
-        BtnHoraInicio = findViewById(R.id. BtnHoraInicio);
-        BtnHoraFin = findViewById(R.id. BtnHoraFin);
-
-
-        BarraTiempo.setMax(120);
-        BarraTiempo.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        barraTiempo.setMax(120);
+        barraTiempo.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                TxtLimiteRiego.setText(progress + "min.");
+                txtLimiteRiego.setText(progress + "min.");
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -83,22 +76,22 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
             }
         });
 
-        BtnEnvioTiempo.setOnClickListener(new View.OnClickListener() {
+        btnEnvioTiempo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(SeleccionTiempoRiego.this, "OK", Toast.LENGTH_SHORT).show();
-                String tempTiempo = TxtLimiteRiego.getText().toString();
+                String tempTiempo = txtLimiteRiego.getText().toString();
                 Toast.makeText(SeleccionTiempoRiego.this, tempTiempo, Toast.LENGTH_SHORT).show();
-                TxtLimiteRiego.setText(tempTiempo);
-                DataLimiteRiego.setValue(BarraTiempo.getProgress());
+                txtLimiteRiego.setText(tempTiempo);
+                DataLimiteRiego.setValue(barraTiempo.getProgress());
             }
         });
 
-        BtnEnvioHorario.setOnClickListener(new View.OnClickListener() {
+        btnEnvioHorario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String temp = TxtHoraInicioRiego.getText().toString();
-                String temp1 = TxtHoraFinRiego.getText().toString();
+                String temp = txtHoraInicioRiego.getText().toString();
+                String temp1 = txtHoraFinRiego.getText().toString();
                 Toast.makeText(getApplicationContext(), temp, Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), temp1, Toast.LENGTH_SHORT).show();
@@ -113,7 +106,7 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
           @Override
           public void onDataChange(@NonNull DataSnapshot snapshot) {
             int temp = snapshot.getValue(int.class);
-            TxtLimiteRiego.setText("" + temp + "min.");
+            txtLimiteRiego.setText("" + temp + "min.");
           }
 
           @Override
@@ -126,8 +119,8 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 HorarioRiego horarioRiego = snapshot.getValue(HorarioRiego.class);
-                TxtHoraInicioRiego.setText("" + horarioRiego.getHoraInicioRiego());
-                TxtHoraFinRiego.setText("" + horarioRiego.getHoraFinRiego());
+                txtHoraInicioRiego.setText("" + horarioRiego.getHoraInicioRiego());
+                txtHoraFinRiego.setText("" + horarioRiego.getHoraFinRiego());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -140,14 +133,14 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int Hour, int Minute) {
-                T1Hour = Hour;
-                T1Minute = Minute;
+                t1Hour = Hour;
+                t1Minute = Minute;
                 //BtnHoraInicio.setText(String.format(Locale.getDefault(),"%02d:%02d", T1Hour, T1Minute));
-                TxtHoraInicioRiego.setText(String.format(Locale.getDefault(),"%02d:%02d", T1Hour, T1Minute));
+                txtHoraInicioRiego.setText(String.format(Locale.getDefault(),"%02d:%02d", t1Hour, t1Minute));
             }
         };
         //int style = AlertDialog.THEME_HOLO_DARK;
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, T1Hour, T1Minute, true);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, t1Hour, t1Minute, true);
         timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();
     }
@@ -157,14 +150,14 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int Hour, int Minute) {
-                T2Hour = Hour;
-                T2Minute = Minute;
+                t2Hour = Hour;
+                t2Minute = Minute;
                 //BtnHoraFin.setText(String.format(Locale.getDefault(),"%02d:%02d", T2Hour, T2Minute));
-                TxtHoraFinRiego.setText(String.format(Locale.getDefault(),"%02d:%02d", T2Hour, T2Minute));
+                txtHoraFinRiego.setText(String.format(Locale.getDefault(),"%02d:%02d", t2Hour, t2Minute));
             }
         };
         //int style = AlertDialog.THEME_HOLO_DARK;
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, T1Hour, T1Minute, true);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, t1Hour, t1Minute, true);
         timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();
     }
