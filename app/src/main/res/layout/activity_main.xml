@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context=".MainActivity">
 
     <Button
@@ -80,14 +81,6 @@
         app:layout_constraintStart_toStartOf="@+id/titAmb"
         app:layout_constraintTop_toBottomOf="@+id/titAmb"
         tools:ignore="HardcodedText" />
-
-    <com.ekn.gruzer.gaugelibrary.ArcGauge
-        android:id="@+id/gaugeTempAmb"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:layout_constraintEnd_toEndOf="@+id/titTemp"
-        app:layout_constraintStart_toStartOf="@+id/titTemp"
-        app:layout_constraintTop_toBottomOf="@+id/titTemp" />
 
     <TextView
         android:id="@+id/txtHumAmb"
@@ -235,10 +228,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="100dp"
-        android:text="ToggleButton"
+        android:layout_marginTop="120dp"
+        android:onClick="onclick"
         android:textOff="OFF"
         android:textOn="ON"
+        android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/btnAccesoTiempo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAccesoTiempo" />
@@ -247,11 +242,13 @@
         android:id="@+id/btnMailRiego"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="50dp"
-        android:text="ToggleButton"
+        android:onClick="onclick"
         android:textOff="OFF"
         android:textOn="ON"
+        android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnAccesoTiempo"
         app:layout_constraintTop_toBottomOf="@+id/btnAccesoTiempo" />

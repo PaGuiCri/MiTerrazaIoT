@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     TextView txtHumAmb, txtTempAmb, txtLimiteHum, txtHumSus, txtTiempoRiego;
     Button btnAccesoTiempo, btnAccesoHum;
     ToggleButton btnAuto, btnMailIni, btnMailRiego;
-    ArcGauge gaugeTempAmb;
 
     FirebaseDatabase database;
     DatabaseReference DataLimiteHumedad;
@@ -47,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private DatosRiego datosRiego;
     private HorarioRiego horarioRiego;
     int tempAmb, humAmb, humSus;
+    boolean riegoOn = false;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -65,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
         btnAuto = findViewById(R.id.btnAuto);
         btnMailIni = findViewById(R.id.btnMailIni);
         btnMailRiego = findViewById(R.id.btnMailRiego);
-
-        gaugeTempAmb = findViewById(R.id. gaugeTempAmb);
 
         database = FirebaseDatabase.getInstance();
         DataLimiteHumedad = database.getReference("LimiteHumedad");
@@ -93,16 +91,16 @@ public class MainActivity extends AppCompatActivity {
                 goToSelectHum();
             }
         });
-        boolean riego_on = false;
+
         DataRiegoConectado.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Boolean riego_on = snapshot.getValue(boolean.class);
-                if(riego_on == true){
+                riegoOn = snapshot.getValue(boolean.class);
+                if(riegoOn){
                     txtLimiteHum.setTextColor(Color.rgb(0,255,0));
                     txtTiempoRiego.setTextColor(Color.rgb(0,255,0));
                     Toast.makeText(getApplicationContext(), "RIEGO CONECTADO", Toast.LENGTH_SHORT).show();
-                }else if(riego_on == false) {
+                }else {
                     txtLimiteHum.setTextColor(Color.rgb(255,0,0));
                     txtTiempoRiego.setTextColor(Color.rgb(255,0,0));
                     Toast.makeText(getApplicationContext(), "RIEGO DESCONECTADO", Toast.LENGTH_SHORT).show();
@@ -117,10 +115,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Boolean temp = snapshot.getValue(boolean.class);
-                if(temp == true){
+                if(temp){
                     btnAuto.setTextColor(-16711936);
                     btnAuto.setChecked(true);
-                }else if( temp == false) {
+                }else {
                     btnAuto.setTextColor(-65536);
                     btnAuto.setChecked(false);
                 }
@@ -134,36 +132,32 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 Boolean temp = snapshot.getValue(boolean.class);
-                if(temp == true){
+                if(temp){
                     btnMailIni.setTextColor(-16711936);
                     btnMailIni.setChecked(true);
-                }else if( temp == false) {
+                }else {
                     btnMailIni.setTextColor(-65536);
                     btnMailIni.setChecked(false);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
         DataMailRiego.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Boolean temp = snapshot.getValue(boolean.class);
-                if(temp == true){
+                if(temp){
                     btnMailRiego.setTextColor(-16711936);
                     btnMailRiego.setChecked(true);
-                }else if( temp == false) {
+                }else {
                     btnMailRiego.setTextColor(-65536);
                     btnMailRiego.setChecked(false);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
         DataHorarioRiego.addValueEventListener(new ValueEventListener() {
@@ -180,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DatosRiego datosRiego = snapshot.getValue(DatosRiego.class);
-                if(riego_on == true){
+                if(riegoOn){
                     txtLimiteHum.setText("" + datosRiego.getHumRiego() + "%");
                     txtTiempoRiego.setText("" + datosRiego.getTiempoRiego() + "min.");
                 }
@@ -193,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int temp = snapshot.getValue(int.class);
-                if(riego_on != true){
+                if(!riegoOn){
                     txtLimiteHum.setText("" + temp + "%");
                 }
             }
@@ -205,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int temp = snapshot.getValue(int.class);
-                if(riego_on == false){
+                if(!riegoOn){
                     txtTiempoRiego.setText("" + temp + "min.");
                 }
             }
@@ -321,7 +315,6 @@ public class MainActivity extends AppCompatActivity {
                 DataOK.setValue(true);
             }
         }
-
         if (view.getId() == R.id.btnMailIni) {
             if (btnMailIni.isChecked()) {
                 Toast.makeText(getApplicationContext(), "Envio Mail Activado", Toast.LENGTH_SHORT).show();

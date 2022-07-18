@@ -40,7 +40,7 @@ public class informacionBT extends AppCompatActivity {
         Set<BluetoothDevice> dispositivos = adaptadorBT.getBondedDevices();
         if(dispositivos.size()>0){
             for(BluetoothDevice device:dispositivos){
-                dispositivosSincronizados.add(device.getName() + "/n" + device.getAddress());
+                dispositivosSincronizados.add("  " + device.getName() /*+ "\n" + device.getAddress()*/);
             }
         }else {
             Toast.makeText(this, "No hay Dispositivos Sincronizados", Toast.LENGTH_SHORT).show();
@@ -52,7 +52,7 @@ public class informacionBT extends AppCompatActivity {
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             String informacion = ((TextView) view).getText().toString();
             String direccion = informacion.substring(informacion.length() -17);
-            Intent cambio = new Intent(informacionBT.this, MainActivity.class);
+            Intent cambio = new Intent(informacionBT.this, MainActivityBT.class);
             cambio.putExtra(dispositivoSeleccionado, direccion);
             startActivity(cambio);
         }
