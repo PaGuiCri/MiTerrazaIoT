@@ -18,6 +18,7 @@ import java.util.Set;
 public class informacionBT extends AppCompatActivity {
 
     ListView lista;
+    TextView titDispSinc;
     BluetoothAdapter adaptadorBT;
     ArrayAdapter dispositivosSincronizados;
     public static final String dispositivoSeleccionado = "direccionMAC";
@@ -27,7 +28,7 @@ public class informacionBT extends AppCompatActivity {
         setContentView(R.layout.activity_informacion_bt);
 
         lista = findViewById(R.id.lista);
-
+        titDispSinc = findViewById(R.id. titDispSinc);
     }
 
     @Override
@@ -57,6 +58,7 @@ public class informacionBT extends AppCompatActivity {
             startActivity(cambio);
         }
     };
+
     public void verificarEstadoBT(){
         adaptadorBT = BluetoothAdapter.getDefaultAdapter();
         if(adaptadorBT == null){
