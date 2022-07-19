@@ -9,12 +9,10 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.ekn.gruzer.gaugelibrary.ArcGauge;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,8 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
 
 
-    TextView txtHumAmb, txtTempAmb, txtLimiteHum, txtHumSus, txtTiempoRiego;
-    Button btnAccesoTiempo, btnAccesoHum;
+    TextView txtHumAmb, txtTempAmb, txtLimiteHum, txtHumSus, txtTiempoRiego, titTiempoRiego, titHumRiego;
     ToggleButton btnAuto, btnMailIni, btnMailRiego;
 
     FirebaseDatabase database;
@@ -54,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
         txtTempAmb = findViewById(R.id.txtTempAmb);
         txtHumAmb = findViewById(R.id.txtHumAmb);
-        txtLimiteHum = findViewById(R.id.txtLimiteHum);
+        txtLimiteHum = findViewById(R.id.btnLimiteHum);
         txtHumSus = findViewById(R.id.txtHumSus);
 
-        btnAccesoHum = findViewById(R.id.btnAccesoHum);
-        btnAccesoTiempo = findViewById(R.id.btnAccesoTiempo);
-        txtTiempoRiego = findViewById(R.id.txtTiempoRiego);
+        titHumRiego = findViewById(R.id.titHumRiego);
+        titTiempoRiego = findViewById(R.id.titTiempoRiego);
+        txtTiempoRiego = findViewById(R.id.btnTiempoRiego);
         btnAuto = findViewById(R.id.btnAuto);
         btnMailIni = findViewById(R.id.btnMailIni);
         btnMailRiego = findViewById(R.id.btnMailRiego);
@@ -75,20 +72,18 @@ public class MainActivity extends AppCompatActivity {
         DataDatosRiego = database.getReference("DatosRiego");
         DataRiegoConectado = database.getReference("RiegoConectado");
 
-        btnAccesoTiempo.setOnClickListener(new View.OnClickListener() {
+        txtLimiteHum.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                goToSelectTemp();
-            }
-        });
-
-        btnAccesoHum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 goToSelectHum();
             }
         });
-
+        txtTiempoRiego.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToSelectTemp();
+            }
+        });
         DataRiegoConectado.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -124,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
         DataMailIni.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -141,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
         DataMailRiego.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -171,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
         DataLimiteHumedad.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -183,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
         DataLimiteRiego.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

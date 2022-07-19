@@ -8,19 +8,19 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btnAccesoTiempo"
+        android:id="@+id/titTiempoRiego"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/rounded_button"
         android:text="TIEMPO DE RIEGO"
-        app:layout_constraintEnd_toEndOf="@+id/btnAccesoHum"
-        app:layout_constraintStart_toStartOf="@+id/btnAccesoHum"
-        app:layout_constraintTop_toBottomOf="@+id/txtLimiteHum"
+        app:layout_constraintEnd_toEndOf="@+id/titHumRiego"
+        app:layout_constraintStart_toStartOf="@+id/titHumRiego"
+        app:layout_constraintTop_toBottomOf="@+id/btnLimiteHum"
         tools:ignore="HardcodedText,MissingConstraints" />
 
     <Button
-        android:id="@+id/btnAccesoHum"
+        android:id="@+id/titHumRiego"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
         android:layout_marginTop="20dp"
@@ -33,7 +33,7 @@
         tools:ignore="HardcodedText,MissingConstraints" />
 
     <TextView
-        android:id="@+id/txtTiempoRiego"
+        android:id="@+id/btnTiempoRiego"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
@@ -44,13 +44,13 @@
         android:textSize="40dp"
         android:textStyle="bold"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/btnAccesoTiempo"
-        app:layout_constraintStart_toStartOf="@+id/btnAccesoTiempo"
-        app:layout_constraintTop_toBottomOf="@+id/btnAccesoTiempo"
+        app:layout_constraintEnd_toEndOf="@+id/titTiempoRiego"
+        app:layout_constraintStart_toStartOf="@+id/titTiempoRiego"
+        app:layout_constraintTop_toBottomOf="@+id/titTiempoRiego"
         tools:ignore="HardcodedText,MissingConstraints,SpUsage" />
 
     <TextView
-        android:id="@+id/txtLimiteHum"
+        android:id="@+id/btnLimiteHum"
         android:layout_width="120dp"
         android:layout_height="44dp"
         android:layout_marginTop="11dp"
@@ -62,9 +62,9 @@
         android:textAlignment="center"
         android:textSize="40dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/btnAccesoHum"
-        app:layout_constraintStart_toStartOf="@+id/btnAccesoHum"
-        app:layout_constraintTop_toBottomOf="@+id/btnAccesoHum"
+        app:layout_constraintEnd_toEndOf="@+id/titHumRiego"
+        app:layout_constraintStart_toStartOf="@+id/titHumRiego"
+        app:layout_constraintTop_toBottomOf="@+id/titHumRiego"
         tools:ignore="HardcodedText,MissingConstraints,SpUsage" />
 
     <TextView

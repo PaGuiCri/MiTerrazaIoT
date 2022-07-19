@@ -23,8 +23,7 @@ import java.util.Locale;
 public class SeleccionTiempoRiego extends AppCompatActivity {
 
     SeekBar barraTiempo;
-    TextView txtLimiteRiego, txtHoraInicioRiego, txtHoraFinRiego;
-    Button btnEnvioTiempo, btnEnvioHorario, btnHoraInicio, btnHoraFin;
+    TextView txtLimiteRiego, txtHoraInicioRiego, txtHoraFinRiego, btnEnvioTiempo, btnEnvioHorario, titHoraInicio, titHoraFin;
     int t1Hour, t1Minute, t2Hour, t2Minute;
 
     FirebaseDatabase database;
@@ -54,8 +53,8 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
         txtLimiteRiego = findViewById(R.id. TxtLimiteRiego);
         txtHoraInicioRiego = findViewById(R.id. TxtHoraInicioRiego);
         txtHoraFinRiego = findViewById(R.id. TxtHoraFinRiego);
-        btnHoraInicio = findViewById(R.id. BtnHoraInicio);
-        btnHoraFin = findViewById(R.id. BtnHoraFin);
+        titHoraInicio = findViewById(R.id.titHoraInicio);
+        titHoraFin = findViewById(R.id.titHoraFin);
 
         barraTiempo.setMax(120);
         barraTiempo.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

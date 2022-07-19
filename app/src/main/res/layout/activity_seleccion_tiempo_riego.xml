@@ -39,13 +39,17 @@
         app:layout_constraintStart_toStartOf="@+id/titulo"
         app:layout_constraintTop_toBottomOf="@+id/titulo" />
 
-    <Button
+    <TextView
         android:id="@+id/BtnEnvioTiempo"
         android:layout_width="wrap_content"
-        android:layout_height="44dp"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/rounded_button"
-        android:text="Enviar"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="95dp"
+        android:clickable="true"
+        android:text="CONFIRMAR"
+        android:textAlignment="center"
+        android:textColor="@color/Gradient_1"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/titAmb"
         app:layout_constraintStart_toStartOf="@+id/titAmb"
         app:layout_constraintTop_toBottomOf="@+id/titAmb" />
@@ -82,32 +86,34 @@
         tools:ignore="MissingConstraints" />
 
 
-    <Button
-        android:id="@+id/BtnHoraInicio"
+    <TextView
+        android:id="@+id/titHoraInicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_button"
         android:gravity="center"
-        android:onClick="popTimePicker1"
-        android:text="Inicio"
-        android:textColor="@color/white"
-        android:textSize="20sp"
+        android:text="INICIO"
+        android:textAlignment="center"
+        android:textColor="#5c9a0f"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/TitHorario"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TitHorario" />
 
-    <Button
-        android:id="@+id/BtnHoraFin"
+    <TextView
+        android:id="@+id/titHoraFin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_button"
-        android:onClick="popTimePicker2"
-        android:text="Fin"
-        android:textColor="@color/white"
-        android:textSize="20sp"
+        android:text="FIN"
+        android:textAlignment="center"
+        android:textColor="#5c9a0f"
+        android:textSize="25sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/TitHorario"
         app:layout_constraintTop_toBottomOf="@+id/TitHorario" />
 
@@ -140,9 +146,10 @@
         android:textSize="35dp"
         android:textStyle="bold"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/BtnHoraInicio"
-        app:layout_constraintStart_toStartOf="@+id/BtnHoraInicio"
-        app:layout_constraintTop_toBottomOf="@+id/BtnHoraInicio"
+        android:onClick="popTimePicker1"
+        app:layout_constraintEnd_toEndOf="@+id/titHoraInicio"
+        app:layout_constraintStart_toStartOf="@+id/titHoraInicio"
+        app:layout_constraintTop_toBottomOf="@+id/titHoraInicio"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -157,18 +164,23 @@
         android:textSize="35dp"
         android:textStyle="bold"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/BtnHoraFin"
-        app:layout_constraintStart_toStartOf="@+id/BtnHoraFin"
-        app:layout_constraintTop_toBottomOf="@+id/BtnHoraFin"
+        android:onClick="popTimePicker2"
+        app:layout_constraintEnd_toEndOf="@+id/titHoraFin"
+        app:layout_constraintStart_toStartOf="@+id/titHoraFin"
+        app:layout_constraintTop_toBottomOf="@+id/titHoraFin"
         tools:ignore="MissingConstraints" />
 
-    <Button
+    <TextView
         android:id="@+id/BtnEnvioHorario"
         android:layout_width="wrap_content"
-        android:layout_height="44dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="160dp"
-        android:background="@drawable/rounded_button"
-        android:text="Enviar"
+        android:clickable="true"
+        android:text="CONFIRMAR"
+        android:textAlignment="center"
+        android:textColor="@color/Gradient_1"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/TitHorario"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="@+id/TitHorario"

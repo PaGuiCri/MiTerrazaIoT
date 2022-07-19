@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,10 +17,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class SeleccionHumedadRiego extends AppCompatActivity {
 
-
-    Button btnEnvioHum;
     SeekBar barraHum;
-    TextView txtHumRiego;
+    TextView txtHumRiego, btnEnvioHum;
 
     FirebaseDatabase database;
     DatabaseReference DataLimiteHumedad;
@@ -33,9 +30,9 @@ public class SeleccionHumedadRiego extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleccion_humedad_riego);
 
-        btnEnvioHum = findViewById(R.id. BtnEnvioHum);
-        barraHum = findViewById(R.id. BarraHum);
-        txtHumRiego = findViewById(R.id. TxtHumRiego);
+        btnEnvioHum = findViewById(R.id.btnEnvioHum);
+        barraHum = findViewById(R.id.barraHum);
+        txtHumRiego = findViewById(R.id.txtHumRiego);
 
         database = FirebaseDatabase.getInstance();
         DataLimiteHumedad = database.getReference("LimiteHumedad");

@@ -11,8 +11,7 @@ import android.widget.TextView;
 
 public class SelectBtWiFiActivity extends AppCompatActivity {
 
-    Button btnBluetooth, btnWiFi;
-    TextView txtTitSelectProtocol;
+    TextView txtTitSelectProtocol,btnBluetooth, btnWiFi;
     ImageView imgMonstera;
 
     @Override

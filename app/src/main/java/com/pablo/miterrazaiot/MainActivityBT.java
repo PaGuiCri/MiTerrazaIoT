@@ -53,12 +53,12 @@ public class MainActivityBT extends AppCompatActivity {
 
         txtTempAmb = findViewById(R.id.txtTempAmb);
         txtHumAmb = findViewById(R.id.txtHumAmb);
-        txtLimiteHum = findViewById(R.id.txtLimiteHum);
+        txtLimiteHum = findViewById(R.id.btnLimiteHum);
         txtHumSus = findViewById(R.id.txtHumSus);
 
-        btnAccesoHum = findViewById(R.id.btnAccesoHum);
-        btnAccesoTiempo = findViewById(R.id.btnAccesoTiempo);
-        txtTiempoRiego = findViewById(R.id.txtTiempoRiego);
+        btnAccesoHum = findViewById(R.id.titHumRiego);
+        btnAccesoTiempo = findViewById(R.id.titTiempoRiego);
+        txtTiempoRiego = findViewById(R.id.btnTiempoRiego);
         btnAuto = findViewById(R.id.btnAuto);
 
         database = FirebaseDatabase.getInstance();
