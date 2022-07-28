@@ -79,14 +79,16 @@
 
     <ImageView
         android:id="@+id/img_monstera"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_marginStart="122dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="122dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titulo"
+        app:srcCompat="@drawable/logo"
         tools:ignore="MissingConstraints"
-        tools:srcCompat="@drawable/logo_monstera" />
+        tools:srcCompat="@mipmap/ic_launcher_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
