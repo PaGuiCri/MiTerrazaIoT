@@ -19,10 +19,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.Set;
+
 public class MainActivity extends AppCompatActivity {
 
 
-    TextView txtHumAmb, txtTempAmb, txtLimiteHum, txtHumSus, txtTiempoRiego, titTiempoRiego, titHumRiego;
+    TextView txtHumAmb, txtTempAmb, txtLimiteHum, txtHumSus, txtTiempoRiego, titTiempoRiego, titHumRiego, btnRestart;
     ToggleButton btnAuto, btnMailIni, btnMailRiego;
 
     FirebaseDatabase database;
@@ -42,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private DatosRiego datosRiego;
     int tempAmb, humAmb, humSus;
     boolean riegoOn = false;
+    long lastUpdate = System.currentTimeMillis();
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -60,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         btnAuto = findViewById(R.id.btnAuto);
         btnMailIni = findViewById(R.id.btnMailIni);
         btnMailRiego = findViewById(R.id.btnMailRiego);
+        btnRestart = findViewById(R.id. btnRestart);
 
         database = FirebaseDatabase.getInstance();
         DataLimiteHumedad = database.getReference("LimiteHumedad");
@@ -72,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
         DataDatosRiego = database.getReference("DatosRiego");
         DataRiegoConectado = database.getReference("RiegoConectado");
 
+        btnRestart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         txtLimiteHum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,11 +101,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 riegoOn = snapshot.getValue(boolean.class);
-                if(riegoOn){
+                if (riegoOn) {
                     txtLimiteHum.setTextColor(Color.rgb(0,255,0));
                     txtTiempoRiego.setTextColor(Color.rgb(0,255,0));
                     Toast.makeText(getApplicationContext(), "RIEGO CONECTADO", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     txtLimiteHum.setTextColor(Color.rgb(255,0,0));
                     txtTiempoRiego.setTextColor(Color.rgb(255,0,0));
                     Toast.makeText(getApplicationContext(), "RIEGO DESCONECTADO", Toast.LENGTH_SHORT).show();
@@ -198,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
         DataMedidas.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                lastUpdate = System.currentTimeMillis();
                 Medidas medidas = snapshot.getValue(Medidas.class);
                 txtHumAmb.setText("" + medidas.getDHT11().getHumedad() +"%");
                 txtTempAmb.setText("" + medidas.getDHT11().getTemperatura() +"ºC");
