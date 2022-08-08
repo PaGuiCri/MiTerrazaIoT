@@ -19,27 +19,24 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.Set;
-
 public class MainActivity extends AppCompatActivity {
 
 
-    TextView txtHumAmb, txtTempAmb, txtLimiteHum, txtHumSus, txtTiempoRiego, titTiempoRiego, titHumRiego, btnRestart;
+    TextView txtHumAmb, txtTempAmb, txtLimiteHum, txtHumSus, txtTiempoRiego, titTiempoRiego, titHumRiego, btnReset, btnCheck;
     ToggleButton btnAuto, btnMailIni, btnMailRiego;
 
     FirebaseDatabase database;
-    DatabaseReference DataLimiteHumedad;
-    DatabaseReference DataRiegoAuto;
-    DatabaseReference DataMailIni;
-    DatabaseReference DataMailRiego;
-    DatabaseReference DataLimiteRiego;
-    DatabaseReference DataMedidas;
-    DatabaseReference DataOK;
-    DatabaseReference DataDatosRiego;
-    DatabaseReference DataRiegoConectado;
+    DatabaseReference dataLimiteHumedad;
+    DatabaseReference dataRiegoAuto;
+    DatabaseReference dataMailIni;
+    DatabaseReference dataMailRiego;
+    DatabaseReference dataLimiteRiego;
+    DatabaseReference dataMedidas;
+    DatabaseReference dataOK;
+    DatabaseReference dataDatosRiego;
+    DatabaseReference dataRiegoConectado;
+    DatabaseReference dataReset;
+    DatabaseReference dataCheck;
 
     private Medidas medidas;
     private DHT11 DHT11;
@@ -66,23 +63,33 @@ public class MainActivity extends AppCompatActivity {
         btnAuto = findViewById(R.id.btnAuto);
         btnMailIni = findViewById(R.id.btnMailIni);
         btnMailRiego = findViewById(R.id.btnMailRiego);
-        btnRestart = findViewById(R.id. btnRestart);
+        btnReset = findViewById(R.id.btnReset);
+        btnCheck = findViewById(R.id. btnCheck);
 
         database = FirebaseDatabase.getInstance();
-        DataLimiteHumedad = database.getReference("LimiteHumedad");
-        DataLimiteRiego = database.getReference("LimiteRiego");
-        DataMedidas = database.getReference("Medidas");
-        DataRiegoAuto = database.getReference("RiegoAUTO");
-        DataMailIni = database.getReference("MailIni");
-        DataMailRiego = database.getReference("MailRiego");
-        DataOK = database.getReference("OK");
-        DataDatosRiego = database.getReference("DatosRiego");
-        DataRiegoConectado = database.getReference("RiegoConectado");
+        dataLimiteHumedad = database.getReference("LimiteHumedad");
+        dataLimiteRiego = database.getReference("LimiteRiego");
+        dataMedidas = database.getReference("Medidas");
+        dataRiegoAuto = database.getReference("RiegoAUTO");
+        dataMailIni = database.getReference("MailIni");
+        dataMailRiego = database.getReference("MailRiego");
+        dataOK = database.getReference("OK");
+        dataDatosRiego = database.getReference("DatosRiego");
+        dataRiegoConectado = database.getReference("RiegoConectado");
+        dataReset = database.getReference("Reset");
+        dataCheck = database.getReference("Check");
 
-        btnRestart.setOnClickListener(new View.OnClickListener() {
+        btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dataCheck.setValue(true);
+            }
+        });
 
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dataReset.setValue(true);
             }
         });
         txtLimiteHum.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 goToSelectTemp();
             }
         });
-        DataRiegoConectado.addValueEventListener(new ValueEventListener() {
+        dataRiegoConectado.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 riegoOn = snapshot.getValue(boolean.class);
@@ -116,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        DataRiegoAuto.addValueEventListener(new ValueEventListener() {
+        dataRiegoAuto.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Boolean temp = snapshot.getValue(boolean.class);
@@ -133,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        DataMailIni.addValueEventListener(new ValueEventListener() {
+        dataMailIni.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -151,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        DataMailRiego.addValueEventListener(new ValueEventListener() {
+        dataMailRiego.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Boolean temp = snapshot.getValue(boolean.class);
@@ -168,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        DataDatosRiego.addValueEventListener(new ValueEventListener() {
+        dataDatosRiego.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DatosRiego datosRiego = snapshot.getValue(DatosRiego.class);
@@ -182,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        DataLimiteHumedad.addValueEventListener(new ValueEventListener() {
+        dataLimiteHumedad.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int temp = snapshot.getValue(int.class);
@@ -195,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        DataLimiteRiego.addValueEventListener(new ValueEventListener() {
+        dataLimiteRiego.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int temp = snapshot.getValue(int.class);
@@ -208,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        DataMedidas.addValueEventListener(new ValueEventListener() {
+        dataMedidas.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 lastUpdate = System.currentTimeMillis();
@@ -308,34 +315,34 @@ public class MainActivity extends AppCompatActivity {
         if (view.getId() == R.id.btnAuto) {
             if (btnAuto.isChecked()) {
                 Toast.makeText(getApplicationContext(), "AUTO ON", Toast.LENGTH_SHORT).show();
-                DataRiegoAuto.setValue(true);
-                DataOK.setValue(true);
+                dataRiegoAuto.setValue(true);
+                dataOK.setValue(true);
             } else {
                 Toast.makeText(getApplicationContext(), "AUTO OFF", Toast.LENGTH_SHORT).show();
-                DataRiegoAuto.setValue(false);
-                DataOK.setValue(true);
+                dataRiegoAuto.setValue(false);
+                dataOK.setValue(true);
             }
         }
         if (view.getId() == R.id.btnMailIni) {
             if (btnMailIni.isChecked()) {
                 Toast.makeText(getApplicationContext(), "Envio Mail Activado", Toast.LENGTH_SHORT).show();
-                DataMailIni.setValue(true);
-                DataOK.setValue(true);
+                dataMailIni.setValue(true);
+                dataOK.setValue(true);
             } else {
                 Toast.makeText(getApplicationContext(), "Envio Mail Desactivado", Toast.LENGTH_SHORT).show();
-                DataMailIni.setValue(false);
-                DataOK.setValue(true);
+                dataMailIni.setValue(false);
+                dataOK.setValue(true);
             }
         }
         if (view.getId() == R.id.btnMailRiego) {
             if (btnMailRiego.isChecked()) {
                 Toast.makeText(getApplicationContext(), "Envio Mail Activado", Toast.LENGTH_SHORT).show();
-                DataMailRiego.setValue(true);
-                DataOK.setValue(true);
+                dataMailRiego.setValue(true);
+                dataOK.setValue(true);
             } else {
                 Toast.makeText(getApplicationContext(), "Envio Mail Desactivado", Toast.LENGTH_SHORT).show();
-                DataMailRiego.setValue(false);
-                DataOK.setValue(true);
+                dataMailRiego.setValue(false);
+                dataOK.setValue(true);
             }
         }
     }
