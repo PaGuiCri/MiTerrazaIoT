@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
 
 
-    TextView txtHumAmb, txtTempAmb, txtLimiteHum, txtHumSus, txtTiempoRiego, titTiempoRiego, titHumRiego, btnReset, btnCheck;
+    TextView txtHumAmb, txtTempAmb, txtLimiteHum, txtHumSus, txtTiempoRiego, titTiempoRiego, titHumRiego, btnReset;
     ToggleButton btnAuto, btnMailIni, btnMailRiego;
 
     FirebaseDatabase database;
@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference dataDatosRiego;
     DatabaseReference dataRiegoConectado;
     DatabaseReference dataReset;
-    DatabaseReference dataCheck;
 
     private Medidas medidas;
     private DHT11 DHT11;
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         btnMailIni = findViewById(R.id.btnMailIni);
         btnMailRiego = findViewById(R.id.btnMailRiego);
         btnReset = findViewById(R.id.btnReset);
-        btnCheck = findViewById(R.id. btnCheck);
 
         database = FirebaseDatabase.getInstance();
         dataLimiteHumedad = database.getReference("LimiteHumedad");
@@ -77,14 +75,6 @@ public class MainActivity extends AppCompatActivity {
         dataDatosRiego = database.getReference("DatosRiego");
         dataRiegoConectado = database.getReference("RiegoConectado");
         dataReset = database.getReference("Reset");
-        dataCheck = database.getReference("Check");
-
-        btnCheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dataCheck.setValue(true);
-            }
-        });
 
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
