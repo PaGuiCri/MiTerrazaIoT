@@ -14,13 +14,16 @@
         <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/drawable/ic_launcher_monstera_background.xml" value="0.11" />
         <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/drawable/logo_bn_1.xml" value="0.147" />
         <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/drawable/rounded_button.xml" value="0.147" />
-        <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/layout/activity_informacion_bt.xml" value="0.2384428223844282" />
+        <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/layout/activity_informacion_bt.xml" value="0.2" />
+        <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/layout/activity_main_bt.xml" value="0.25" />
         <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/layout/activity_pop_up_status.xml" value="0.33" />
+        <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/layout/activity_seleccion_humedad_riego.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/layout/activity_seleccion_tiempo_riego.xml" value="0.17889492753623187" />
         <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/layout/activity_select_bt_wi_fi.xml" value="0.22" />
+        <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/layout/activity_select_option_auth.xml" value="0.25" />
         <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/layout/nombres.xml" value="0.14673913043478262" />
         <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.109" />
         <entry key="..\:/Users/Pablo/StudioProjects/MiTerrazaIoT/app/src/main/res/mipmap-anydpi-v26/ic_launcher_logo_BN.xml" value="0.147" />

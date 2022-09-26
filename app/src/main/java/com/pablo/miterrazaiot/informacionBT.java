@@ -13,14 +13,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.Set;
 
 public class informacionBT extends AppCompatActivity {
 
     ListView lista;
-    TextView titDispSinc;
+    TextView titDispSinc, btnLogOut;
     BluetoothAdapter adaptadorBT;
     ArrayAdapter dispositivosSincronizados;
+    FirebaseAuth mAuth;
+
     public static final String dispositivoSeleccionado = "direccionMAC";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,19 @@ public class informacionBT extends AppCompatActivity {
 
         lista = findViewById(R.id.lista);
         titDispSinc = findViewById(R.id. titDispSinc);
+        btnLogOut = findViewById(R.id. btnLogOut);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                Intent intent = new Intent(informacionBT.this, SelectOptionAuthActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override

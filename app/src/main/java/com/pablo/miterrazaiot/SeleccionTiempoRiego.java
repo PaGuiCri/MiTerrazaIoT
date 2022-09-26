@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +27,7 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
     TextView txtLimiteRiego, txtHoraInicioRiego, txtHoraFinRiego, btnEnvioTiempo, btnEnvioHorario, titHoraInicio, titHoraFin;
     int t1Hour, t1Minute, t2Hour, t2Minute;
 
+    String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
     FirebaseDatabase database;
     DatabaseReference DataLimiteRiego;
     DatabaseReference DataOK;
@@ -40,12 +42,12 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
         setContentView(R.layout.activity_seleccion_tiempo_riego);
 
         database = FirebaseDatabase.getInstance();
-        DataLimiteRiego = database.getReference("LimiteRiego");
-        DataLimiteHoraInicio = database.getReference("LimiteHoraInicio");
-        DataLimiteHoraFin = database.getReference("LimiteHoraFin");
-        DataOK = database.getReference("OK");
-        DataDatosRiego = database.getReference("DatosRiego");
-        DataRiegoConectado = database.getReference("RiegoConectado");
+        DataLimiteRiego = database.getReference(addId("LimiteRiego"));
+        DataLimiteHoraInicio = database.getReference(addId("LimiteHoraInicio"));
+        DataLimiteHoraFin = database.getReference(addId("LimiteHoraFin"));
+        DataOK = database.getReference(addId("OK"));
+        DataDatosRiego = database.getReference(addId("DatosRiego"));
+        DataRiegoConectado = database.getReference(addId("RiegoConectado"));
 
         barraTiempo = findViewById(R.id.BarraTiempo);
         btnEnvioTiempo = findViewById(R.id. BtnEnvioTiempo);
@@ -99,8 +101,9 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
         DataLimiteRiego.addValueEventListener(new ValueEventListener() {
           @Override
           public void onDataChange(@NonNull DataSnapshot snapshot) {
-            int temp = snapshot.getValue(int.class);
-            txtLimiteRiego.setText("" + temp + "min.");
+              if (!Utilities.comprobarCampo(snapshot)) return;
+              int temp = snapshot.getValue(int.class);
+              txtLimiteRiego.setText("" + temp + "min.");
           }
           @Override
           public void onCancelled(@NonNull DatabaseError error) {
@@ -110,6 +113,7 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
         DataLimiteHoraInicio.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!Utilities.comprobarCampo(snapshot)) return;
                 String temp = snapshot.getValue(String.class);
                 txtHoraInicioRiego.setText("" + temp);
             }
@@ -121,6 +125,7 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
         DataLimiteHoraFin.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!Utilities.comprobarCampo(snapshot)) return;
                 String temp = snapshot.getValue(String.class);
                 txtHoraFinRiego.setText("" + temp);
             }
@@ -128,6 +133,11 @@ public class SeleccionTiempoRiego extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+    }
+
+    @NonNull
+    private String addId(String campo) {
+        return "/" + id + "/" + campo;
     }
 
     public void popTimePicker1(View view){
